@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crazy Andy - Watch Anime Online</title>
+  <!-- మీ Google site verification meta tag ని ఇక్కడ కింద పేస్ట్ చేయండి -->
+  <title>Crazy Andy - Stream Anime</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -17,113 +18,371 @@
       background-color: #090712;
       padding: 14px 25px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid #7b2cbf;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      gap: 10px;
     }
-    .logo { font-size: 25px; font-weight: 800; color: #ffffff; cursor: pointer; }
+    .logo { font-size: 25px; font-weight: 800; color: #ffffff; cursor: pointer; letter-spacing: 1px; }
     .logo span { color: #9d4edd; }
+    .nav-right { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
     .home-btn {
-      background: #7b2cbf; color: #fff; border: none;
-      padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;
+      background: #241b4b; color: #fff; border: 1px solid #7b2cbf;
+      padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold;
     }
-    .container { max-width: 1100px; margin: auto; padding: 20px; }
+    .home-btn:hover { background: #7b2cbf; }
+    .search-box {
+      padding: 8px 16px; width: 230px; border-radius: 20px;
+      border: 1px solid #6c3ce9; background-color: #191433;
+      color: #ffffff; outline: none; font-size: 14px;
+    }
+    .search-box::placeholder { color: #a59ec9; }
 
+    .container { max-width: 1150px; margin: auto; padding: 20px; }
+
+    /* Watch Player Section */
     #watchView { display: none; margin-bottom: 30px; }
     .anime-banner {
-      background: #1d153d;
+      background: linear-gradient(135deg, #1d153d 0%, #120d26 100%);
       border: 1px solid #35276b;
       border-radius: 14px;
       padding: 20px;
       display: flex;
       gap: 20px;
+      align-items: flex-start;
       margin-bottom: 18px;
     }
     .banner-poster {
-      width: 145px; height: 210px; border-radius: 10px;
-      object-fit: cover; border: 2px solid #8a4fff; flex-shrink: 0;
+      width: 145px;
+      height: 210px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 2px solid #8a4fff;
+      flex-shrink: 0;
+      background: #231b47;
     }
+    .banner-details h1 { margin: 0 0 8px; font-size: 24px; color: #f3e8ff; }
+    .banner-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .tag {
+      background: #2b1f5c; color: #d8b4fe; font-size: 12px;
+      padding: 4px 10px; border-radius: 6px; font-weight: 600;
+    }
+    .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold; margin-bottom: 4px; }
+    .overview-text { font-size: 14px; color: #cfc9e8; line-height: 1.5; margin: 0; }
+
     .player-wrapper {
-      background: #000; border: 2px solid #8a4fff;
-      border-radius: 12px; overflow: hidden;
+      background: #000;
+      border: 2px solid #8a4fff;
+      border-radius: 12px;
+      overflow: hidden;
     }
-    .video-frame { width: 100%; height: 450px; border: none; display: block; }
-    .btn-row { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .video-frame { width: 100%; height: 460px; border: none; display: block; }
+
+    /* Episodes & Controls Panel */
+    .controls-panel {
+      background: #17122e;
+      border: 1px solid #2e2459;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 15px;
+    }
+    .panel-title {
+      font-size: 14px; color: #e0aaff; font-weight: bold;
+      margin-bottom: 10px; display: block; border-left: 3px solid #9d4edd; padding-left: 8px;
+    }
+    .quality-tip {
+      font-size: 12px; color: #b8aedc; margin-bottom: 12px; display: block;
+    }
+    .ep-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    .ep-btn {
+      background: #231b47;
+      color: #ffffff;
+      border: 1px solid #5a32c7;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      min-width: 68px;
+      text-align: center;
+    }
+    .ep-btn:hover, .ep-btn.active {
+      background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+      border-color: #ffffff;
+    }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; border-top: 1px solid #2e2459; padding-top: 12px; }
     .action-btn {
-      background: #9d4edd; color: #fff; border: none;
-      padding: 9px 16px; border-radius: 8px; font-weight: bold;
+      background: #241b4b; color: #fff; border: 1px solid #9d4edd;
+      padding: 8px 15px; border-radius: 8px; font-weight: bold;
       cursor: pointer; text-decoration: none; font-size: 13px;
     }
 
+    /* Language Changer */
     .section-heading {
-      font-size: 20px; font-weight: 700; margin: 20px 0 15px;
+      font-size: 19px; font-weight: 700; margin: 22px 0 15px;
       padding-left: 12px; border-left: 4px solid #8a4fff;
     }
+    .lang-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+    .lang-card {
+      background: #1c1538; border: 1px solid #5a32c7; border-radius: 10px;
+      min-width: 110px; padding: 12px 10px; text-align: center; cursor: pointer;
+      transition: 0.2s;
+    }
+    .lang-card.active, .lang-card:hover {
+      background: linear-gradient(145deg, #6c3ce9, #9d4edd);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .lang-title { font-weight: bold; font-size: 14px; display: block; }
+    .lang-sub { font-size: 11px; color: #d4c8ff; display: block; margin-top: 3px; }
+
+    /* Poster Grid */
     .poster-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
       gap: 20px;
     }
     .poster-card {
-      background-color: #17122e; border-radius: 12px;
-      overflow: hidden; cursor: pointer; border: 2px solid #2b2154;
+      background-color: #17122e; border-radius: 12px; overflow: hidden;
+      cursor: pointer; border: 2px solid #2b2154; transition: 0.25s;
     }
-    .poster-card:hover { border-color: #9d4edd; }
-    .poster-img-wrap { position: relative; width: 100%; height: 255px; background: #2b1f5c; }
+    .poster-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(138, 79, 255, 0.5);
+      border-color: #9d4edd;
+    }
+    .poster-img-wrap { position: relative; width: 100%; height: 255px; background: #231b47; }
     .poster-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .badge-season {
+      position: absolute; top: 8px; left: 8px; background: rgba(15, 12, 29, 0.85);
+      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px;
+      border-radius: 6px; border: 1px solid #8a4fff;
+    }
+    .badge-ep {
+      position: absolute; bottom: 8px; left: 8px; background: #7b2cbf;
+      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 6px;
+    }
     .poster-info { padding: 12px; }
     .poster-title { font-size: 15px; font-weight: bold; margin: 0; color: #f3e8ff; }
     .poster-meta { font-size: 12px; color: #a59ec9; margin-top: 4px; }
+
+    @media (max-width: 650px) {
+      .anime-banner { flex-direction: column; align-items: center; text-align: center; }
+      .video-frame { height: 230px; }
+      .poster-grid { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Top Navbar with Search Bar -->
   <nav>
     <div class="logo" onclick="closeWatch()">CRAZY <span>ANDY</span></div>
-    <button class="home-btn" onclick="closeWatch()">🏠 Home</button>
+    <div class="nav-right">
+      <button class="home-btn" onclick="closeWatch()">🏠 Home</button>
+      <input type="text" id="searchInput" class="search-box" onkeyup="filterCards()" placeholder="Search anime...">
+    </div>
   </nav>
 
   <div class="container">
+
+    <!-- WATCH PLAYER SECTION -->
     <div id="watchView">
       <div class="anime-banner">
-        <img class="banner-poster" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" alt="Unlimited Book of Spells">
-        <div>
-          <h1 style="margin:0 0 8px;">Unlimited Book of Spells</h1>
-          <p style="color:#cfc9e8; font-size:14px;">Cassy, Verne, and Gus attend the Ravenswood Academy for Wizards and Witches, using the Unlimited Book of Spells to stop Zarlak.</p>
+        <img id="watchPoster" class="banner-poster" src="" alt="Poster">
+        <div class="banner-details">
+          <h1 id="watchHeading">Title</h1>
+          <div class="banner-tags" id="watchTags"></div>
+          <div class="overview-label">Overview</div>
+          <p class="overview-text" id="watchDesc"></p>
         </div>
       </div>
+
       <div class="player-wrapper">
-        <iframe id="ytFrame" class="video-frame" src="" allowfullscreen></iframe>
+        <iframe id="ytFrame" class="video-frame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="btn-row">
-        <button class="action-btn" onclick="closeWatch()" style="background:#ff4757;">✕ Close</button>
-        <a href="https://www.youtube.com/playlist?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP" target="_blank" class="action-btn">▶ Open Full Playlist</a>
+
+      <div class="controls-panel">
+        <span class="quality-tip">💡 <b>HD Quality Tip:</b> వీడియో ప్లే అవుతున్నప్పుడు కింద ఉన్న <b>Settings (⚙️) → Quality</b> లో హై క్వాలిటీ సెలెక్ట్ చేసుకోండి.</span>
+        <span class="panel-title">Episodes:</span>
+        <div class="ep-grid" id="allEpisodesGrid"></div>
+
+        <div class="btn-row">
+          <button class="action-btn" onclick="closeWatch()" style="background:#ff4757; border:none;">✕ Close Player</button>
+          <a id="directYtLink" href="#" target="_blank" class="action-btn">▶ Open Direct Link</a>
+        </div>
       </div>
     </div>
 
-    <div class="section-heading">Latest Series</div>
+    <!-- LANGUAGE CHANGER -->
+    <div id="homeFilters">
+      <div class="section-heading">Watch in Your Own Language</div>
+      <div class="lang-row">
+        <div class="lang-card active" onclick="selectLang('all', this)">
+          <span class="lang-title">All</span><span class="lang-sub">అన్నీ</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('Telugu', this)">
+          <span class="lang-title">Telugu</span><span class="lang-sub">తెలుగు</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('Japanese', this)">
+          <span class="lang-title">Japanese</span><span class="lang-sub">日本語</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('English', this)">
+          <span class="lang-title">English</span><span class="lang-sub">Sub / Dub</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('Hindi', this)">
+          <span class="lang-title">Hindi</span><span class="lang-sub">हिन्दी</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LATEST SERIES GRID -->
+    <div class="section-heading" id="listTitle">Latest Series</div>
     <div class="poster-grid">
-      <div class="poster-card" onclick="openWatch()">
+
+      <!-- Card 1: Unlimited Book of Spells -->
+      <div class="poster-card" data-lang="English Hindi" onclick="openCartoon('ubos', 1)">
         <div class="poster-img-wrap">
+          <span class="badge-season">Full Series</span>
+          <span class="badge-ep">26 Episodes</span>
           <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" alt="Unlimited Book of Spells">
         </div>
         <div class="poster-info">
           <h4 class="poster-title">Unlimited Book of Spells</h4>
-          <div class="poster-meta">Full Playlist • Click to Watch</div>
+          <div class="poster-meta">English • Hindi • Playlist</div>
         </div>
       </div>
+
+      <!-- Card 2: CreepSchool in Telugu -->
+      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('creepschool', 1)">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Kushi TV</span>
+          <span class="badge-ep">Telugu</span>
+          <!-- మీరు GitHub లో అప్‌లోడ్ చేసే కొత్త వాల్‌పేపర్ ఫైల్ పేరును ఇక్కడ పెట్టండి -->
+          <img src="creepschool.png" alt="CreepSchool in Telugu">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">CreepSchool (Telugu)</h4>
+          <div class="poster-meta">Telugu • Kushi TV Classic</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script>
-    function openWatch() {
+    const cartoons = {
+      ubos: {
+        title: "Unlimited Book of Spells",
+        poster: "https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png",
+        tags: ["Season 1", "26 Episodes", "Fantasy", "Magic"],
+        desc: "Cassy, Verne, and Gus attend the Ravenswood Academy for Wizards and Witches, using the Unlimited Book of Spells to stop the evil Zarlak from draining the Earth's magic.",
+        type: "playlist",
+        playlistId: "PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",
+        totalEpisodes: 26,
+        directUrl: "https://www.youtube.com/playlist?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP"
+      },
+      creepschool: {
+        title: "CreepSchool (Telugu)",
+        poster: "creepschool.png",
+        tags: ["Telugu Dub", "Kushi TV", "Mystery", "Comedy"],
+        desc: "Four kids accidentally board the wrong bus and end up at CreepSchool, a mysterious boarding school filled with friendly monsters, ghosts, and supernatural adventures.",
+        type: "videos",
+        episodes: [
+          { name: "EP 1: Tricks that Treat", videoId: "Qs4Si3yXEwI" }
+        ],
+        directUrl: "https://youtu.be/Qs4Si3yXEwI"
+      }
+    };
+
+    let currentLang = 'all';
+
+    function openCartoon(key, epNum) {
+      const item = cartoons[key];
+      document.getElementById('watchPoster').src = item.poster;
+      document.getElementById('watchDesc').innerText = item.desc;
+      document.getElementById('directYtLink').href = item.directUrl;
+
+      const tagsBox = document.getElementById('watchTags');
+      tagsBox.innerHTML = '';
+      item.tags.forEach(t => {
+        tagsBox.innerHTML += `<span class="tag">${t}</span>`;
+      });
+
+      const epContainer = document.getElementById('allEpisodesGrid');
+      epContainer.innerHTML = '';
+
+      if (item.type === "playlist") {
+        for (let i = 1; i <= item.totalEpisodes; i++) {
+          const btn = document.createElement('button');
+          btn.className = 'ep-btn' + (i === epNum ? ' active' : '');
+          btn.innerText = 'EP ' + i;
+          btn.onclick = function() {
+            document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('watchHeading').innerText = item.title + ' - Episode ' + i;
+            document.getElementById('ytFrame').src = "https://www.youtube.com/embed?listType=playlist&list=" + item.playlistId + "&index=" + (i - 1) + "&rel=0&modestbranding=1";
+          };
+          epContainer.appendChild(btn);
+        }
+        document.getElementById('watchHeading').innerText = item.title + ' - Episode ' + epNum;
+        document.getElementById('ytFrame').src = "https://www.youtube.com/embed?listType=playlist&list=" + item.playlistId + "&index=" + (epNum - 1) + "&rel=0&modestbranding=1";
+      } else {
+        item.episodes.forEach((ep, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'ep-btn' + (idx === 0 ? ' active' : '');
+          btn.innerText = ep.name;
+          btn.onclick = function() {
+            document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('watchHeading').innerText = item.title + ' - ' + ep.name;
+            document.getElementById('ytFrame').src = "https://www.youtube.com/embed/" + ep.videoId + "?autoplay=1&rel=0&modestbranding=1";
+          };
+          epContainer.appendChild(btn);
+        });
+        document.getElementById('watchHeading').innerText = item.title + ' - ' + item.episodes[0].name;
+        document.getElementById('ytFrame').src = "https://www.youtube.com/embed/" + item.episodes[0].videoId + "?rel=0&modestbranding=1";
+      }
+
       document.getElementById('watchView').style.display = 'block';
-      document.getElementById('ytFrame').src = "https://www.youtube.com/embed/videoseries?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP";
+      document.getElementById('homeFilters').style.display = 'none';
+      document.getElementById('listTitle').innerText = 'Recommended';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     function closeWatch() {
       document.getElementById('ytFrame').src = '';
       document.getElementById('watchView').style.display = 'none';
+      document.getElementById('homeFilters').style.display = 'block';
+      document.getElementById('listTitle').innerText = 'Latest Series';
+    }
+
+    function selectLang(lang, el) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      filterCards();
+    }
+
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.getElementsByClassName('poster-card');
+      for (let i = 0; i < cards.length; i++) {
+        const title = cards[i].querySelector('.poster-title').innerText.toLowerCase();
+        const langs = cards[i].getAttribute('data-lang');
+        cards[i].style.display = (title.includes(q) && (currentLang === 'all' || langs.includes(currentLang))) ? 'block' : 'none';
+      }
     }
   </script>
+
 </body>
 </html>
