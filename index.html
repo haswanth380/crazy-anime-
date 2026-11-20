@@ -14,7 +14,6 @@
       margin: 0;
       padding: 0;
     }
-    /* Top Navbar */
     nav {
       background-color: #090712;
       padding: 14px 25px;
@@ -43,7 +42,7 @@
 
     .container { max-width: 1150px; margin: auto; padding: 20px; }
 
-    /* Watch Page View (AnimeSalt Style) */
+    /* Watch Page View */
     #watchView { display: none; }
     .anime-banner {
       background: linear-gradient(135deg, #1d153d 0%, #120d26 100%);
@@ -72,7 +71,7 @@
     .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold; margin-bottom: 5px; }
     .overview-text { font-size: 14px; color: #cfc9e8; line-height: 1.5; margin: 0; }
 
-    /* Embedded Video Player Box */
+    /* Video Player */
     .player-wrapper {
       background: #000000;
       border: 2px solid #6c3ce9;
@@ -82,7 +81,7 @@
     }
     .video-frame { width: 100%; height: 480px; border: none; display: block; }
 
-    /* Server & Episode Controls Box */
+    /* Controls Panel */
     .controls-panel {
       background: #17122e;
       border: 1px solid #2e2459;
@@ -106,7 +105,7 @@
       border-color: #ffffff;
     }
 
-    /* Section Heading & Grid */
+    /* Section & Grid */
     .section-heading {
       font-size: 19px; font-weight: 700; margin: 28px 0 15px;
       padding-left: 12px; border-left: 4px solid #8a4fff;
@@ -170,7 +169,7 @@
 
   <div class="container">
 
-    <!-- 1. WATCH PAGE SECTION (క్లిక్ చేసినప్పుడు ఇక్కడ ఓపెన్ అవుతుంది) -->
+    <!-- WATCH PAGE SECTION -->
     <div id="watchView">
       <div class="anime-banner">
         <img id="watchPoster" class="banner-poster" src="" alt="Poster">
@@ -182,12 +181,10 @@
         </div>
       </div>
 
-      <!-- Direct Video Player -->
       <div class="player-wrapper">
         <iframe id="videoFrame" class="video-frame" src="" allowfullscreen></iframe>
       </div>
 
-      <!-- Select Server & Episodes -->
       <div class="controls-panel">
         <div class="panel-row">
           <span class="panel-title">Select Server</span>
@@ -197,13 +194,13 @@
           </div>
         </div>
         <div class="panel-row">
-          <span class="panel-title">Select Episode</span>
+          <span class="panel-title">Episodes / Playlist</span>
           <div class="btn-group" id="epButtonsContainer"></div>
         </div>
       </div>
     </div>
 
-    <!-- 2. HOME / RECOMMENDED ANIME LIST -->
+    <!-- HOME SECTION -->
     <div id="homeFilters">
       <div class="section-heading">Watch in Your Own Language</div>
       <div class="lang-row">
@@ -218,144 +215,19 @@
     <div class="section-heading" id="gridHeading">Latest Episodes</div>
     <div class="poster-grid" id="animeGrid">
 
-      <!-- Attack on Titan -->
-      <div class="poster-card" data-lang="Telugu Japanese English" onclick="openWatchPage('aot')">
+      <!-- Ultimate Book of Spells (మీ కొత్త ప్లేలిస్ట్ & వాల్‌పేపర్) -->
+      <div class="poster-card" data-lang="English Hindi" onclick="openWatchPage('ubos')">
         <div class="poster-img-wrap">
-          <span class="badge-season">Season 1</span>
-          <span class="badge-ep">EP: 1</span>
-          <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-73IhOXpJZiMF.jpg" alt="Attack on Titan">
+          <span class="badge-season">Full Series</span>
+          <span class="badge-ep">All Episodes</span>
+          <img src="ubos.png" alt="Ultimate Book of Spells">
         </div>
         <div class="poster-info">
-          <h4 class="poster-title">Attack on Titan</h4>
-          <div class="poster-meta">Telugu • Japanese • English</div>
+          <h4 class="poster-title">Ultimate Book of Spells</h4>
+          <div class="poster-meta">English • Hindi • Playlist</div>
         </div>
       </div>
 
-      <!-- Demon Slayer -->
-      <div class="poster-card" data-lang="Telugu Japanese Hindi" onclick="openWatchPage('ds')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Season 1</span>
-          <span class="badge-ep">EP: 1</span>
-          <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-PEn1CTc93blC.jpg" alt="Demon Slayer">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Demon Slayer</h4>
-          <div class="poster-meta">Telugu • Hindi • Japanese</div>
-        </div>
-      </div>
+    
 
-      <!-- Jujutsu Kaisen -->
-      <div class="poster-card" data-lang="Japanese English Hindi" onclick="openWatchPage('jjk')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Season 1</span>
-          <span class="badge-ep">EP: 1</span>
-          <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-bbBWj4pEFseh.jpg" alt="Jujutsu Kaisen">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Jujutsu Kaisen</h4>
-          <div class="poster-meta">Japanese • English • Hindi</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    const animeData = {
-      aot: {
-        title: "Attack on Titan",
-        poster: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-73IhOXpJZiMF.jpg",
-        tags: ["Season 1", "Action", "Dark Fantasy", "Telugu • Japanese • English"],
-        desc: "Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls.",
-        episodes: [
-          { name: "Episode 1", videoId: "tQ0mzXRXRkM" }
-        ]
-      },
-      ds: {
-        title: "Demon Slayer: Kimetsu no Yaiba",
-        poster: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-PEn1CTc93blC.jpg",
-        tags: ["Season 1", "Action", "Supernatural", "Telugu • Hindi • Japanese"],
-        desc: "A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, who is turning into a demon slowly. Tanjiro sets out to become a demon slayer to avenge his family and cure his sister.",
-        episodes: [
-          { name: "Episode 1", videoId: "VQGCKyvzIM4" }
-        ]
-      },
-      jjk: {
-        title: "Jujutsu Kaisen",
-        poster: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-bbBWj4pEFseh.jpg",
-        tags: ["Season 1", "Action", "Supernatural", "Japanese • English • Hindi"],
-        desc: "A boy swallows a cursed talisman - the finger of a demon - and becomes cursed himself. He enters a shaman's school to be able to locate the demon's other body parts and thus exorcise himself.",
-        episodes: [
-          { name: "Episode 1", videoId: "pkKu9hLT-t8" }
-        ]
-      }
-    };
-
-    let currentLang = 'all';
-
-    function openWatchPage(key) {
-      const data = animeData[key];
-      document.getElementById('watchPoster').src = data.poster;
-      document.getElementById('watchTitle').innerText = data.title;
-      document.getElementById('watchDesc').innerText = data.desc;
-
-      const tagsBox = document.getElementById('watchTags');
-      tagsBox.innerHTML = '';
-      data.tags.forEach(t => {
-        tagsBox.innerHTML += `<span class="tag">${t}</span>`;
-      });
-
-      const epContainer = document.getElementById('epButtonsContainer');
-      epContainer.innerHTML = '';
-      data.episodes.forEach((ep, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'ep-btn' + (idx === 0 ? ' active' : '');
-        btn.innerText = ep.name;
-        btn.onclick = function() {
-          document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          document.getElementById('videoFrame').src = "https://www.youtube.com/embed/" + ep.videoId + "?autoplay=1";
-        };
-        epContainer.appendChild(btn);
-      });
-
-      document.getElementById('videoFrame').src = "https://www.youtube.com/embed/" + data.episodes[0].videoId;
-      document.getElementById('watchView').style.display = 'block';
-      document.getElementById('homeFilters').style.display = 'none';
-      document.getElementById('gridHeading').innerText = 'Recommended Anime';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function goHome() {
-      document.getElementById('videoFrame').src = '';
-      document.getElementById('watchView').style.display = 'none';
-      document.getElementById('homeFilters').style.display = 'block';
-      document.getElementById('gridHeading').innerText = 'Latest Episodes';
-    }
-
-    function switchServer(btn) {
-      document.querySelectorAll('.srv-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const frame = document.getElementById('videoFrame');
-      frame.src = frame.src;
-    }
-
-    function selectLang(lang, el) {
-      currentLang = lang;
-      document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('active'));
-      el.classList.add('active');
-      filterCards();
-    }
-
-    function filterCards() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.getElementsByClassName('poster-card');
-      for (let i = 0; i < cards.length; i++) {
-        const title = cards[i].querySelector('.poster-title').innerText.toLowerCase();
-        const langs = cards[i].getAttribute('data-lang');
-        cards[i].style.display = (title.includes(q) && (currentLang === 'all' || langs.includes(currentLang))) ? 'block' : 'none';
-      }
-    }
-  </script>
-</body>
-</html>
+     
