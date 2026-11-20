@@ -18,7 +18,6 @@
       background-color: #090712;
       padding: 14px 25px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid #7b2cbf;
@@ -26,208 +25,44 @@
       top: 0;
       z-index: 100;
     }
-    .logo { font-size: 25px; font-weight: 800; color: #ffffff; cursor: pointer; letter-spacing: 1px; }
+    .logo { font-size: 25px; font-weight: 800; color: #ffffff; text-decoration: none; cursor: pointer; }
     .logo span { color: #9d4edd; }
-    .nav-right { display: flex; gap: 12px; align-items: center; }
     .home-btn {
-      background: #241b4b; color: #fff; border: 1px solid #7b2cbf;
-      padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold;
+      background: #7b2cbf; color: #fff; border: none;
+      padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;
     }
-    .home-btn:hover { background: #7b2cbf; }
-    .search-box {
-      padding: 8px 16px; width: 240px; border-radius: 20px;
-      border: 1px solid #6c3ce9; background-color: #191433;
-      color: #ffffff; outline: none; font-size: 14px;
+    .home-btn:hover { background: #9d4edd; }
+
+    .container { max-width: 1100px; margin: auto; padding: 20px; }
+
+    /* Watch Player Box */
+    #watchView {
+      display: none;
+      margin-bottom: 30px;
     }
-
-    .container { max-width: 1150px; margin: auto; padding: 20px; }
-
-    /* Watch Page View */
-    #watchView { display: none; }
     .anime-banner {
       background: linear-gradient(135deg, #1d153d 0%, #120d26 100%);
       border: 1px solid #35276b;
       border-radius: 14px;
       padding: 20px;
       display: flex;
-      gap: 22px;
+      gap: 20px;
       align-items: flex-start;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .banner-poster {
-      width: 150px;
-      height: 220px;
+      width: 145px;
+      height: 210px;
       border-radius: 10px;
       object-fit: cover;
       border: 2px solid #8a4fff;
       flex-shrink: 0;
+      background: linear-gradient(135deg, #3b287a, #1b1536);
     }
-    .banner-details h1 { margin: 0 0 8px; font-size: 26px; color: #f3e8ff; }
-    .banner-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .banner-details h1 { margin: 0 0 8px; font-size: 24px; color: #f3e8ff; }
+    .banner-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
     .tag {
       background: #2b1f5c; color: #d8b4fe; font-size: 12px;
       padding: 4px 10px; border-radius: 6px; font-weight: 600;
     }
-    .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold; margin-bottom: 5px; }
-    .overview-text { font-size: 14px; color: #cfc9e8; line-height: 1.5; margin: 0; }
-
-    /* Video Player */
-    .player-wrapper {
-      background: #000000;
-      border: 2px solid #6c3ce9;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    }
-    .video-frame { width: 100%; height: 480px; border: none; display: block; }
-
-    /* Controls Panel */
-    .controls-panel {
-      background: #17122e;
-      border: 1px solid #2e2459;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 15px;
-    }
-    .panel-row { margin-bottom: 14px; }
-    .panel-row:last-child { margin-bottom: 0; }
-    .panel-title {
-      font-size: 13px; color: #b8aedc; font-weight: bold;
-      margin-bottom: 8px; display: block; border-left: 3px solid #9d4edd; padding-left: 8px;
-    }
-    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
-    .srv-btn, .ep-btn {
-      background: #231b47; color: #ffffff; border: 1px solid #5a32c7;
-      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;
-    }
-    .srv-btn.active, .ep-btn.active, .srv-btn:hover, .ep-btn:hover {
-      background: linear-gradient(90deg, #7b2cbf, #9d4edd);
-      border-color: #ffffff;
-    }
-
-    /* Section & Grid */
-    .section-heading {
-      font-size: 19px; font-weight: 700; margin: 28px 0 15px;
-      padding-left: 12px; border-left: 4px solid #8a4fff;
-    }
-    .lang-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
-    .lang-card {
-      background: #1c1538; border: 1px solid #5a32c7; border-radius: 10px;
-      min-width: 110px; padding: 12px; text-align: center; cursor: pointer;
-    }
-    .lang-card.active, .lang-card:hover { background: #7b2cbf; border-color: #fff; }
-
-    .poster-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-      gap: 18px;
-    }
-    .poster-card {
-      background-color: #17122e; border-radius: 12px; overflow: hidden;
-      cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;
-      border: 1px solid #2b2154;
-    }
-    .poster-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(138, 79, 255, 0.45);
-      border-color: #9d4edd;
-    }
-    .poster-img-wrap { position: relative; width: 100%; height: 245px; background: #231b47; }
-    .poster-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .badge-season {
-      position: absolute; top: 8px; left: 8px; background: rgba(15, 12, 29, 0.85);
-      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px;
-      border-radius: 6px; border: 1px solid #8a4fff;
-    }
-    .badge-ep {
-      position: absolute; bottom: 8px; left: 8px; background: #7b2cbf;
-      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 6px;
-    }
-    .poster-info { padding: 11px; }
-    .poster-title {
-      font-size: 14px; font-weight: 600; margin: 0;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .poster-meta { font-size: 12px; color: #9c92c4; margin-top: 4px; }
-
-    @media (max-width: 650px) {
-      .anime-banner { flex-direction: column; align-items: center; text-align: center; }
-      .video-frame { height: 230px; }
-      .poster-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <div class="logo" onclick="goHome()">CRAZY <span>ANDY</span></div>
-    <div class="nav-right">
-      <button class="home-btn" onclick="goHome()">🏠 Home</button>
-      <input type="text" id="searchInput" class="search-box" onkeyup="filterCards()" placeholder="Search anime...">
-    </div>
-  </nav>
-
-  <div class="container">
-
-    <!-- WATCH PAGE SECTION -->
-    <div id="watchView">
-      <div class="anime-banner">
-        <img id="watchPoster" class="banner-poster" src="" alt="Poster">
-        <div class="banner-details">
-          <h1 id="watchTitle">Anime Title</h1>
-          <div class="banner-tags" id="watchTags"></div>
-          <div class="overview-label">Overview</div>
-          <p class="overview-text" id="watchDesc">Description goes here...</p>
-        </div>
-      </div>
-
-      <div class="player-wrapper">
-        <iframe id="videoFrame" class="video-frame" src="" allowfullscreen></iframe>
-      </div>
-
-      <div class="controls-panel">
-        <div class="panel-row">
-          <span class="panel-title">Select Server</span>
-          <div class="btn-group">
-            <button class="srv-btn active" onclick="switchServer(this)">Server 1 (HD)</button>
-            <button class="srv-btn" onclick="switchServer(this)">Server 2 (Fast)</button>
-          </div>
-        </div>
-        <div class="panel-row">
-          <span class="panel-title">Episodes / Playlist</span>
-          <div class="btn-group" id="epButtonsContainer"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HOME SECTION -->
-    <div id="homeFilters">
-      <div class="section-heading">Watch in Your Own Language</div>
-      <div class="lang-row">
-        <div class="lang-card active" onclick="selectLang('all', this)"><b>All</b></div>
-        <div class="lang-card" onclick="selectLang('Telugu', this)"><b>Telugu</b></div>
-        <div class="lang-card" onclick="selectLang('Japanese', this)"><b>Japanese</b></div>
-        <div class="lang-card" onclick="selectLang('English', this)"><b>English</b></div>
-        <div class="lang-card" onclick="selectLang('Hindi', this)"><b>Hindi</b></div>
-      </div>
-    </div>
-
-    <div class="section-heading" id="gridHeading">Latest Episodes</div>
-    <div class="poster-grid" id="animeGrid">
-
-      <!-- Ultimate Book of Spells (మీ కొత్త ప్లేలిస్ట్ & వాల్‌పేపర్) -->
-      <div class="poster-card" data-lang="English Hindi" onclick="openWatchPage('Ultimate Book of Spells')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Full Series</span>
-          <span class="badge-ep">All Episodes</span>
-          <img src="Ultimate Book of Spells.png" alt="Ultimate Book of Spells">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Ultimate Book of Spells</h4>
-          <div class="poster-meta">English • Hindi • Playlist</div>
-        </div>
-      </div>
-
-    
-
-     
+    .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold;
