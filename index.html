@@ -3,66 +3,341 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crazy Anime</title>
+  <title>Crazy Anime - Violet Pro Edition</title>
   <style>
     body {
-      background-color: #0f0f1a;
+      background-color: #09050f;
       color: #ffffff;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 20px;
-      text-align: center;
+      padding: 0;
     }
     header {
-      background-color: #ff4757;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 30px;
+      background: linear-gradient(135deg, #240046, #5a189a);
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 2px solid #9d4edd;
+      box-shadow: 0 4px 25px rgba(157, 78, 221, 0.45);
     }
-    h1 { margin: 0; }
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 12px rgba(224, 170, 255, 0.7);
+    }
+    header p {
+      color: #e0aaff;
+      margin: 6px 0 18px;
+    }
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .search-box, .top-select {
+      padding: 10px 16px;
+      border-radius: 25px;
+      border: 1px solid #9d4edd;
+      background-color: #140a24;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-box {
+      width: 260px;
+    }
+    .search-box::placeholder {
+      color: #b185db;
+    }
+    .container {
+      padding: 30px 20px;
+      max-width: 1150px;
+      margin: auto;
+    }
+    .section-title {
+      color: #c77dff;
+      border-left: 4px solid #9d4edd;
+      padding-left: 12px;
+      margin-bottom: 22px;
+    }
     .anime-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
     }
     .anime-card {
-      background-color: #1e1e2f;
-      border-radius: 10px;
-      padding: 15px;
-      width: 320px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      background-color: #130b1f;
+      border: 1px solid #3c096c;
+      border-radius: 14px;
+      padding: 16px;
+      width: 330px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .anime-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(157, 78, 221, 0.5);
+      border-color: #9d4edd;
     }
     iframe {
       width: 100%;
-      height: 180px;
+      height: 185px;
       border: none;
       border-radius: 8px;
     }
-    h3 { margin: 12px 0 5px; color: #ff6b81; }
-    p { font-size: 14px; color: #cccccc; }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+    h3 {
+      margin: 0;
+      color: #e0aaff;
+      font-size: 19px;
+    }
+    .tag {
+      display: inline-block;
+      background-color: #3c096c;
+      color: #e0aaff;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 10px;
+      margin-top: 6px;
+    }
+    .video-options {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .card-select {
+      flex: 1;
+      background-color: #1d1130;
+      color: #e0aaff;
+      border: 1px solid #5a189a;
+      padding: 7px;
+      border-radius: 8px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+    .download-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .download-btn:hover {
+      background: linear-gradient(90deg, #9d4edd, #c77dff);
+      transform: scale(1.02);
+    }
+
+    /* Download Popup Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background-color: #180d29;
+      border: 2px solid #9d4edd;
+      padding: 25px;
+      border-radius: 14px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(157, 78, 221, 0.7);
+    }
+    .modal-content h3 {
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .modal-content p {
+      color: #c77dff;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .modal-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+    .confirm-dl {
+      background-color: #9d4edd;
+      color: white;
+    }
+    .close-dl {
+      background-color: #2d1b46;
+      color: #e0aaff;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🔥 Crazy Anime World 🔥</h1>
-    <p>Watch Official Anime Episodes Free</p>
+    <h1>⚡ CRAZY ANIME ⚡</h1>
+    <p>Stream & Download Anime in HD Quality</p>
+    <div class="controls-bar">
+      <input type="text" id="searchInput" class="search-box" onkeyup="filterAnime()" placeholder="Search anime...">
+      <select id="globalLang" class="top-select" onchange="filterAnime()">
+        <option value="all">🌐 All Languages</option>
+        <option value="Telugu">Telugu Dub</option>
+        <option value="Japanese">Japanese (Sub)</option>
+        <option value="English">English Dub</option>
+      </select>
+    </div>
   </header>
 
-  <div class="anime-grid">
-    <div class="anime-card">
-      <iframe src="https://www.youtube.com/embed/tQ0mzXRXRkM" allowfullscreen></iframe>
-      <h3>Attack on Titan - Trailer</h3>
-      <p>Official Preview</p>
-    </div>
+  <div class="container">
+    <h2 class="section-title">Featured Anime</h2>
+    <div class="anime-grid" id="animeGrid">
+      
+      <!-- Card 1 -->
+      <div class="anime-card" data-lang="Telugu Japanese English">
+        <iframe src="https://www.youtube.com/embed/tQ0mzXRXRkM" allowfullscreen></iframe>
+        <div class="card-header">
+          <h3>Attack on Titan</h3>
+        </div>
+        <span class="tag">Action • Dark Fantasy</span>
+        
+        <div class="video-options">
+          <select class="card-select lang-choice">
+            <option value="Telugu Dub">Audio: Telugu</option>
+            <option value="Japanese Sub">Audio: Japanese</option>
+            <option value="English Dub">Audio: English</option>
+          </select>
+          <select class="card-select quality-choice">
+            <option value="1080p Full HD">1080p HD</option>
+            <option value="720p HD">720p</option>
+            <option value="480p SD">480p</option>
+          </select>
+        </div>
 
-    <div class="anime-card">
-      <iframe src="https://www.youtube.com/embed/VQGCKyvzIM4" allowfullscreen></iframe>
-      <h3>Demon Slayer - Trailer</h3>
-      <p>Official Preview</p>
+        <button class="download-btn" onclick="openDownload(this, 'Attack on Titan', 'https://www.youtube.com/watch?v=tQ0mzXRXRkM')">
+          ⬇ Download Video
+        </button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="anime-card" data-lang="Telugu Japanese">
+        <iframe src="https://www.youtube.com/embed/VQGCKyvzIM4" allowfullscreen></iframe>
+        <div class="card-header">
+          <h3>Demon Slayer</h3>
+        </div>
+        <span class="tag">Adventure • Supernatural</span>
+
+        <div class="video-options">
+          <select class="card-select lang-choice">
+            <option value="Telugu Dub">Audio: Telugu</option>
+            <option value="Japanese Sub">Audio: Japanese</option>
+            <option value="English Dub">Audio: English</option>
+          </select>
+          <select class="card-select quality-choice">
+            <option value="1080p Full HD">1080p HD</option>
+            <option value="720p HD">720p</option>
+            <option value="480p SD">480p</option>
+          </select>
+        </div>
+
+        <button class="download-btn" onclick="openDownload(this, 'Demon Slayer', 'https://www.youtube.com/watch?v=VQGCKyvzIM4')">
+          ⬇ Download Video
+        </button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="anime-card" data-lang="Japanese English">
+        <iframe src="https://www.youtube.com/embed/pkKu9hLT-t8" allowfullscreen></iframe>
+        <div class="card-header">
+          <h3>Jujutsu Kaisen</h3>
+        </div>
+        <span class="tag">Action • Supernatural</span>
+
+        <div class="video-options">
+          <select class="card-select lang-choice">
+            <option value="Japanese Sub">Audio: Japanese</option>
+            <option value="English Dub">Audio: English</option>
+            <option value="Telugu Dub">Audio: Telugu</option>
+          </select>
+          <select class="card-select quality-choice">
+            <option value="1080p Full HD">1080p HD</option>
+            <option value="720p HD">720p</option>
+            <option value="480p SD">480p</option>
+          </select>
+        </div>
+
+        <button class="download-btn" onclick="openDownload(this, 'Jujutsu Kaisen', 'https://www.youtube.com/watch?v=pkKu9hLT-t8')">
+          ⬇ Download Video
+        </button>
+      </div>
+
     </div>
   </div>
+
+  <!-- Download Popup -->
+  <div class="modal" id="downloadModal">
+    <div class="modal-content">
+      <h3 id="modalTitle">Download Anime</h3>
+      <p id="modalDetails">Selected: 1080p • Telugu</p>
+      <a id="modalLink" href="#" target="_blank" class="modal-btn confirm-dl">Start Download / Open Link</a>
+      <button class="modal-btn close-dl" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    // Search & Language Filter
+    function filterAnime() {
+      let searchText = document.getElementById('searchInput').value.toLowerCase();
+      let selectedLang = document.getElementById('globalLang').value;
+      let cards = document.getElementsByClassName('anime-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        let cardLangs = cards[i].getAttribute('data-lang');
+        
+        let matchesSearch = title.includes(searchText);
+        let matchesLang = (selectedLang === 'all') || cardLangs.includes(selectedLang);
+
+        cards[i].style.display = (matchesSearch && matchesLang) ? "block" : "none";
+      }
+    }
+
+    // Download Popup Logic
+    function openDownload(btn, animeName, videoUrl) {
+      let card = btn.parentElement;
+      let lang = card.querySelector('.lang-choice').value;
+      let quality = card.querySelector('.quality-choice').value;
+
+      document.getElementById('modalTitle').innerText = animeName;
+      document.getElementById('modalDetails').innerText = "Format: " + quality + " | " + lang;
+      document.getElementById('modalLink').href = videoUrl;
+      document.getElementById('downloadModal').style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById('downloadModal').style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
