@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- మీ Google site verification meta tag ని ఇక్కడ కింద పేస్ట్ చేయండి -->
   <title>Crazy Andy - Watch Anime Online</title>
   <style>
     * { box-sizing: border-box; }
@@ -21,48 +20,110 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid #7b2cbf;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
-    .logo { font-size: 25px; font-weight: 800; color: #ffffff; text-decoration: none; cursor: pointer; }
+    .logo { font-size: 25px; font-weight: 800; color: #ffffff; cursor: pointer; }
     .logo span { color: #9d4edd; }
     .home-btn {
       background: #7b2cbf; color: #fff; border: none;
       padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;
     }
-    .home-btn:hover { background: #9d4edd; }
-
     .container { max-width: 1100px; margin: auto; padding: 20px; }
 
-    /* Watch Player Box */
-    #watchView {
-      display: none;
-      margin-bottom: 30px;
-    }
+    #watchView { display: none; margin-bottom: 30px; }
     .anime-banner {
-      background: linear-gradient(135deg, #1d153d 0%, #120d26 100%);
+      background: #1d153d;
       border: 1px solid #35276b;
       border-radius: 14px;
       padding: 20px;
       display: flex;
       gap: 20px;
-      align-items: flex-start;
       margin-bottom: 18px;
     }
     .banner-poster {
-      width: 145px;
-      height: 210px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 2px solid #8a4fff;
-      flex-shrink: 0;
-      background: linear-gradient(135deg, #3b287a, #1b1536);
+      width: 145px; height: 210px; border-radius: 10px;
+      object-fit: cover; border: 2px solid #8a4fff; flex-shrink: 0;
     }
-    .banner-details h1 { margin: 0 0 8px; font-size: 24px; color: #f3e8ff; }
-    .banner-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-    .tag {
-      background: #2b1f5c; color: #d8b4fe; font-size: 12px;
-      padding: 4px 10px; border-radius: 6px; font-weight: 600;
+    .player-wrapper {
+      background: #000; border: 2px solid #8a4fff;
+      border-radius: 12px; overflow: hidden;
     }
-    .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold;
+    .video-frame { width: 100%; height: 450px; border: none; display: block; }
+    .btn-row { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .action-btn {
+      background: #9d4edd; color: #fff; border: none;
+      padding: 9px 16px; border-radius: 8px; font-weight: bold;
+      cursor: pointer; text-decoration: none; font-size: 13px;
+    }
+
+    .section-heading {
+      font-size: 20px; font-weight: 700; margin: 20px 0 15px;
+      padding-left: 12px; border-left: 4px solid #8a4fff;
+    }
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 20px;
+    }
+    .poster-card {
+      background-color: #17122e; border-radius: 12px;
+      overflow: hidden; cursor: pointer; border: 2px solid #2b2154;
+    }
+    .poster-card:hover { border-color: #9d4edd; }
+    .poster-img-wrap { position: relative; width: 100%; height: 255px; background: #2b1f5c; }
+    .poster-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .poster-info { padding: 12px; }
+    .poster-title { font-size: 15px; font-weight: bold; margin: 0; color: #f3e8ff; }
+    .poster-meta { font-size: 12px; color: #a59ec9; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo" onclick="closeWatch()">CRAZY <span>ANDY</span></div>
+    <button class="home-btn" onclick="closeWatch()">🏠 Home</button>
+  </nav>
+
+  <div class="container">
+    <div id="watchView">
+      <div class="anime-banner">
+        <img class="banner-poster" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" alt="Unlimited Book of Spells">
+        <div>
+          <h1 style="margin:0 0 8px;">Unlimited Book of Spells</h1>
+          <p style="color:#cfc9e8; font-size:14px;">Cassy, Verne, and Gus attend the Ravenswood Academy for Wizards and Witches, using the Unlimited Book of Spells to stop Zarlak.</p>
+        </div>
+      </div>
+      <div class="player-wrapper">
+        <iframe id="ytFrame" class="video-frame" src="" allowfullscreen></iframe>
+      </div>
+      <div class="btn-row">
+        <button class="action-btn" onclick="closeWatch()" style="background:#ff4757;">✕ Close</button>
+        <a href="https://www.youtube.com/playlist?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP" target="_blank" class="action-btn">▶ Open Full Playlist</a>
+      </div>
+    </div>
+
+    <div class="section-heading">Latest Series</div>
+    <div class="poster-grid">
+      <div class="poster-card" onclick="openWatch()">
+        <div class="poster-img-wrap">
+          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" alt="Unlimited Book of Spells">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Unlimited Book of Spells</h4>
+          <div class="poster-meta">Full Playlist • Click to Watch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openWatch() {
+      document.getElementById('watchView').style.display = 'block';
+      document.getElementById('ytFrame').src = "https://www.youtube.com/embed/videoseries?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP";
+    }
+    function closeWatch() {
+      document.getElementById('ytFrame').src = '';
+      document.getElementById('watchView').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
