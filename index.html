@@ -4,143 +4,156 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- మీ Google site verification meta tag ని ఇక్కడ కింద పేస్ట్ చేయండి -->
-  <title>Crazy Andy - Stream Anime</title>
+  <title>Crazy Andy - Watch Anime Online</title>
   <style>
     * { box-sizing: border-box; }
     body {
-      background-color: #130f26;
+      background-color: #0f0c1d;
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
     }
+    /* Top Navbar */
     nav {
-      background-color: #0d0a1a;
-      padding: 15px 25px;
+      background-color: #090712;
+      padding: 14px 25px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #6c3ce9;
+      border-bottom: 2px solid #7b2cbf;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    .logo { font-size: 26px; font-weight: 800; color: #ffffff; letter-spacing: 1px; }
+    .logo { font-size: 25px; font-weight: 800; color: #ffffff; cursor: pointer; letter-spacing: 1px; }
     .logo span { color: #9d4edd; }
+    .nav-right { display: flex; gap: 12px; align-items: center; }
+    .home-btn {
+      background: #241b4b; color: #fff; border: 1px solid #7b2cbf;
+      padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold;
+    }
+    .home-btn:hover { background: #7b2cbf; }
     .search-box {
-      padding: 9px 18px;
-      width: 260px;
-      border-radius: 20px;
-      border: 1px solid #6c3ce9;
-      background-color: #1c1638;
-      color: #ffffff;
-      outline: none;
-      font-size: 14px;
+      padding: 8px 16px; width: 240px; border-radius: 20px;
+      border: 1px solid #6c3ce9; background-color: #191433;
+      color: #ffffff; outline: none; font-size: 14px;
     }
-    .search-box::placeholder { color: #a59ec9; }
-    .container { max-width: 1200px; margin: auto; padding: 25px 20px; }
-    .section-heading {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 25px 0 15px;
-      padding-left: 12px;
-      border-left: 4px solid #8a4fff;
+
+    .container { max-width: 1150px; margin: auto; padding: 20px; }
+
+    /* Watch Page View (AnimeSalt Style) */
+    #watchView { display: none; }
+    .anime-banner {
+      background: linear-gradient(135deg, #1d153d 0%, #120d26 100%);
+      border: 1px solid #35276b;
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      margin-bottom: 20px;
     }
-    .lang-row { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
-    .lang-card {
-      background: linear-gradient(145deg, #241b4b, #3b287a);
-      border: 1px solid #6c3ce9;
-      border-radius: 12px;
-      min-width: 120px;
-      padding: 15px 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+    .banner-poster {
+      width: 150px;
+      height: 220px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 2px solid #8a4fff;
+      flex-shrink: 0;
     }
-    .lang-card:hover, .lang-card.active {
-      transform: translateY(-4px);
-      background: linear-gradient(145deg, #6c3ce9, #9d4edd);
-      box-shadow: 0 5px 15px rgba(157, 78, 221, 0.5);
+    .banner-details h1 { margin: 0 0 8px; font-size: 26px; color: #f3e8ff; }
+    .banner-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .tag {
+      background: #2b1f5c; color: #d8b4fe; font-size: 12px;
+      padding: 4px 10px; border-radius: 6px; font-weight: 600;
     }
-    .lang-title { font-weight: bold; font-size: 15px; display: block; }
-    .lang-sub { font-size: 12px; color: #d4c8ff; margin-top: 4px; display: block; }
-    .poster-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-    }
-    .poster-card {
-      background-color: #1b1536;
+    .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold; margin-bottom: 5px; }
+    .overview-text { font-size: 14px; color: #cfc9e8; line-height: 1.5; margin: 0; }
+
+    /* Embedded Video Player Box */
+    .player-wrapper {
+      background: #000000;
+      border: 2px solid #6c3ce9;
       border-radius: 12px;
       overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+    .video-frame { width: 100%; height: 480px; border: none; display: block; }
+
+    /* Server & Episode Controls Box */
+    .controls-panel {
+      background: #17122e;
       border: 1px solid #2e2459;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 15px;
+    }
+    .panel-row { margin-bottom: 14px; }
+    .panel-row:last-child { margin-bottom: 0; }
+    .panel-title {
+      font-size: 13px; color: #b8aedc; font-weight: bold;
+      margin-bottom: 8px; display: block; border-left: 3px solid #9d4edd; padding-left: 8px;
+    }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .srv-btn, .ep-btn {
+      background: #231b47; color: #ffffff; border: 1px solid #5a32c7;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;
+    }
+    .srv-btn.active, .ep-btn.active, .srv-btn:hover, .ep-btn:hover {
+      background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+      border-color: #ffffff;
+    }
+
+    /* Section Heading & Grid */
+    .section-heading {
+      font-size: 19px; font-weight: 700; margin: 28px 0 15px;
+      padding-left: 12px; border-left: 4px solid #8a4fff;
+    }
+    .lang-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+    .lang-card {
+      background: #1c1538; border: 1px solid #5a32c7; border-radius: 10px;
+      min-width: 110px; padding: 12px; text-align: center; cursor: pointer;
+    }
+    .lang-card.active, .lang-card:hover { background: #7b2cbf; border-color: #fff; }
+
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 18px;
+    }
+    .poster-card {
+      background-color: #17122e; border-radius: 12px; overflow: hidden;
+      cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid #2b2154;
     }
     .poster-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(138, 79, 255, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(138, 79, 255, 0.45);
       border-color: #9d4edd;
     }
-    .poster-img-wrap { position: relative; width: 100%; height: 250px; background-color: #241b4b; }
+    .poster-img-wrap { position: relative; width: 100%; height: 245px; background: #231b47; }
     .poster-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .badge-season {
-      position: absolute; top: 10px; left: 10px;
-      background-color: rgba(19, 15, 38, 0.85); color: #ffffff;
-      font-size: 11px; font-weight: bold; padding: 4px 8px;
+      position: absolute; top: 8px; left: 8px; background: rgba(15, 12, 29, 0.85);
+      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px;
       border-radius: 6px; border: 1px solid #8a4fff;
     }
     .badge-ep {
-      position: absolute; bottom: 10px; left: 10px;
-      background-color: #7b2cbf; color: #ffffff;
-      font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 6px;
+      position: absolute; bottom: 8px; left: 8px; background: #7b2cbf;
+      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 6px;
     }
-    .poster-info { padding: 12px; }
+    .poster-info { padding: 11px; }
     .poster-title {
-      font-size: 15px; font-weight: 600; margin: 0;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #f3e8ff;
+      font-size: 14px; font-weight: 600; margin: 0;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .poster-meta { font-size: 12px; color: #a59ec9; margin-top: 5px; }
+    .poster-meta { font-size: 12px; color: #9c92c4; margin-top: 4px; }
 
-    /* Player Modal */
-    .player-modal {
-      display: none; position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%; background: rgba(8, 6, 18, 0.92);
-      z-index: 1000; justify-content: center; align-items: center; padding: 15px;
-    }
-    .player-box {
-      background-color: #181230; border: 2px solid #8a4fff;
-      border-radius: 14px; width: 100%; max-width: 820px; padding: 20px;
-      box-shadow: 0 0 35px rgba(138, 79, 255, 0.6); max-height: 92vh; overflow-y: auto;
-    }
-    .player-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .player-top h3 { margin: 0; color: #e0aaff; }
-    .close-btn {
-      background: #ff4757; color: white; border: none;
-      padding: 6px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;
-    }
-    .video-frame { width: 100%; height: 400px; border: none; border-radius: 10px; background: #000; }
-    
-    /* Episode Buttons List */
-    .ep-list-title { font-size: 14px; color: #d4c8ff; margin: 14px 0 8px; font-weight: bold; }
-    .ep-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
-    .ep-btn {
-      background-color: #241b4b; color: #ffffff; border: 1px solid #6c3ce9;
-      padding: 7px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer;
-    }
-    .ep-btn:hover, .ep-btn.active { background-color: #9d4edd; border-color: #ffffff; }
-
-    .player-controls {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;
-      justify-content: space-between; align-items: center;
-      border-top: 1px solid #2e2459; padding-top: 12px;
-    }
-    select, .dl-btn { padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: bold; outline: none; }
-    select { background-color: #241b4b; color: #ffffff; border: 1px solid #8a4fff; }
-    .dl-btn { background: linear-gradient(90deg, #7b2cbf, #9d4edd); color: white; border: none; text-decoration: none; cursor: pointer; }
-    @media (max-width: 600px) {
-      .video-frame { height: 220px; }
+    @media (max-width: 650px) {
+      .anime-banner { flex-direction: column; align-items: center; text-align: center; }
+      .video-frame { height: 230px; }
       .poster-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
@@ -148,152 +161,200 @@
 <body>
 
   <nav>
-    <div class="logo">CRAZY <span>ANDY</span></div>
-    <input type="text" id="searchInput" class="search-box" onkeyup="filterCards()" placeholder="Search anime...">
+    <div class="logo" onclick="goHome()">CRAZY <span>ANDY</span></div>
+    <div class="nav-right">
+      <button class="home-btn" onclick="goHome()">🏠 Home</button>
+      <input type="text" id="searchInput" class="search-box" onkeyup="filterCards()" placeholder="Search anime...">
+    </div>
   </nav>
 
   <div class="container">
-    <div class="section-heading">Watch in Your Own Language</div>
-    <div class="lang-row">
-      <div class="lang-card active" onclick="selectLang('all', this)">
-        <span class="lang-title">All</span><span class="lang-sub">అన్నీ</span>
+
+    <!-- 1. WATCH PAGE SECTION (క్లిక్ చేసినప్పుడు ఇక్కడ ఓపెన్ అవుతుంది) -->
+    <div id="watchView">
+      <div class="anime-banner">
+        <img id="watchPoster" class="banner-poster" src="" alt="Poster">
+        <div class="banner-details">
+          <h1 id="watchTitle">Anime Title</h1>
+          <div class="banner-tags" id="watchTags"></div>
+          <div class="overview-label">Overview</div>
+          <p class="overview-text" id="watchDesc">Description goes here...</p>
+        </div>
       </div>
-      <div class="lang-card" onclick="selectLang('Telugu', this)">
-        <span class="lang-title">Telugu</span><span class="lang-sub">తెలుగు</span>
+
+      <!-- Direct Video Player -->
+      <div class="player-wrapper">
+        <iframe id="videoFrame" class="video-frame" src="" allowfullscreen></iframe>
       </div>
-      <div class="lang-card" onclick="selectLang('Japanese', this)">
-        <span class="lang-title">Japanese</span><span class="lang-sub">日本語</span>
-      </div>
-      <div class="lang-card" onclick="selectLang('English', this)">
-        <span class="lang-title">English</span><span class="lang-sub">Sub / Dub</span>
-      </div>
-      <div class="lang-card" onclick="selectLang('Hindi', this)">
-        <span class="lang-title">Hindi</span><span class="lang-sub">हिन्दी</span>
+
+      <!-- Select Server & Episodes -->
+      <div class="controls-panel">
+        <div class="panel-row">
+          <span class="panel-title">Select Server</span>
+          <div class="btn-group">
+            <button class="srv-btn active" onclick="switchServer(this)">Server 1 (HD)</button>
+            <button class="srv-btn" onclick="switchServer(this)">Server 2 (Fast)</button>
+          </div>
+        </div>
+        <div class="panel-row">
+          <span class="panel-title">Select Episode</span>
+          <div class="btn-group" id="epButtonsContainer"></div>
+        </div>
       </div>
     </div>
 
-    <div class="section-heading">Latest Episodes</div>
+    <!-- 2. HOME / RECOMMENDED ANIME LIST -->
+    <div id="homeFilters">
+      <div class="section-heading">Watch in Your Own Language</div>
+      <div class="lang-row">
+        <div class="lang-card active" onclick="selectLang('all', this)"><b>All</b></div>
+        <div class="lang-card" onclick="selectLang('Telugu', this)"><b>Telugu</b></div>
+        <div class="lang-card" onclick="selectLang('Japanese', this)"><b>Japanese</b></div>
+        <div class="lang-card" onclick="selectLang('English', this)"><b>English</b></div>
+        <div class="lang-card" onclick="selectLang('Hindi', this)"><b>Hindi</b></div>
+      </div>
+    </div>
+
+    <div class="section-heading" id="gridHeading">Latest Episodes</div>
     <div class="poster-grid" id="animeGrid">
 
-      
-
-      
-      
-
-      
-
-  <!-- Video Player Modal -->
-  <div class="player-modal" id="playerModal">
-    <div class="player-box">
-      <div class="player-top">
-        <h3 id="playerTitle">Anime Title</h3>
-        <button class="close-btn" onclick="closePlayer()">✕ Close</button>
-      </div>
-      <iframe id="videoFrame" class="video-frame" src="" allowfullscreen></iframe>
-      
-      <div class="ep-list-title">Select Episode:</div>
-      <div class="ep-buttons" id="epButtonsContainer"></div>
-
-      <div class="player-controls">
-        <div>
-          <select id="audioSelect">
-            <option>Audio: Telugu</option>
-            <option>Audio: Hindi</option>
-            <option>Audio: Japanese</option>
-            <option>Audio: English</option>
-          </select>
-          <select id="qualitySelect">
-            <option>1080p Full HD</option>
-            <option>720p HD</option>
-            <option>480p SD</option>
-          </select>
+      <!-- Attack on Titan -->
+      <div class="poster-card" data-lang="Telugu Japanese English" onclick="openWatchPage('aot')">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Season 1</span>
+          <span class="badge-ep">EP: 1</span>
+          <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-73IhOXpJZiMF.jpg" alt="Attack on Titan">
         </div>
-        <a id="downloadLink" href="#" target="_blank" class="dl-btn">⬇ Watch / Download</a>
+        <div class="poster-info">
+          <h4 class="poster-title">Attack on Titan</h4>
+          <div class="poster-meta">Telugu • Japanese • English</div>
+        </div>
       </div>
+
+      <!-- Demon Slayer -->
+      <div class="poster-card" data-lang="Telugu Japanese Hindi" onclick="openWatchPage('ds')">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Season 1</span>
+          <span class="badge-ep">EP: 1</span>
+          <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-PEn1CTc93blC.jpg" alt="Demon Slayer">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Demon Slayer</h4>
+          <div class="poster-meta">Telugu • Hindi • Japanese</div>
+        </div>
+      </div>
+
+      <!-- Jujutsu Kaisen -->
+      <div class="poster-card" data-lang="Japanese English Hindi" onclick="openWatchPage('jjk')">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Season 1</span>
+          <span class="badge-ep">EP: 1</span>
+          <img src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-bbBWj4pEFseh.jpg" alt="Jujutsu Kaisen">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Jujutsu Kaisen</h4>
+          <div class="poster-meta">Japanese • English • Hindi</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script>
-    // ఇక్కడ ప్రతి అనిమే ఎపిసోడ్ YouTube Video ID లు మార్చుకోవచ్చు
-    const animeDatabase = {
-      naruto: {
-        title: "Naruto - Season 1",
-        episodes: [
-          { name: "EP 1: Enter: Naruto Uzumaki!", videoId: "QczGoCmX-pI" },
-          { name: "EP 2: My Name is Konohamaru!", videoId: "QczGoCmX-pI" },
-          { name: "EP 3: Sasuke and Sakura", videoId: "QczGoCmX-pI" }
-        ]
-      },
+    const animeData = {
       aot: {
-        title: "Attack on Titan - Season 1",
+        title: "Attack on Titan",
+        poster: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-73IhOXpJZiMF.jpg",
+        tags: ["Season 1", "Action", "Dark Fantasy", "Telugu • Japanese • English"],
+        desc: "Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called Titans, forcing humans to hide in fear behind enormous concentric walls.",
         episodes: [
-          { name: "EP 1: To You, in 2000 Years", videoId: "tQ0mzXRXRkM" }
+          { name: "Episode 1", videoId: "tQ0mzXRXRkM" }
         ]
       },
       ds: {
-        title: "Demon Slayer - Season 1",
+        title: "Demon Slayer: Kimetsu no Yaiba",
+        poster: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-PEn1CTc93blC.jpg",
+        tags: ["Season 1", "Action", "Supernatural", "Telugu • Hindi • Japanese"],
+        desc: "A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, who is turning into a demon slowly. Tanjiro sets out to become a demon slayer to avenge his family and cure his sister.",
         episodes: [
-          { name: "EP 1: Cruelty", videoId: "VQGCKyvzIM4" }
+          { name: "Episode 1", videoId: "VQGCKyvzIM4" }
         ]
       },
-      sl: {
-        title: "Solo Leveling - Season 1",
+      jjk: {
+        title: "Jujutsu Kaisen",
+        poster: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-bbBWj4pEFseh.jpg",
+        tags: ["Season 1", "Action", "Supernatural", "Japanese • English • Hindi"],
+        desc: "A boy swallows a cursed talisman - the finger of a demon - and becomes cursed himself. He enters a shaman's school to be able to locate the demon's other body parts and thus exorcise himself.",
         episodes: [
-          { name: "EP 1: I'm Used to It", videoId: "YvGSK8mIlt8" }
+          { name: "Episode 1", videoId: "pkKu9hLT-t8" }
         ]
       }
     };
 
     let currentLang = 'all';
 
-    function selectLang(lang, element) {
-      currentLang = lang;
-      let cards = document.getElementsByClassName('lang-card');
-      for (let i = 0; i < cards.length; i++) cards[i].classList.remove('active');
-      element.classList.add('active');
-      filterCards();
-    }
+    function openWatchPage(key) {
+      const data = animeData[key];
+      document.getElementById('watchPoster').src = data.poster;
+      document.getElementById('watchTitle').innerText = data.title;
+      document.getElementById('watchDesc').innerText = data.desc;
 
-    function filterCards() {
-      let query = document.getElementById('searchInput').value.toLowerCase();
-      let posters = document.getElementsByClassName('poster-card');
-      for (let i = 0; i < posters.length; i++) {
-        let title = posters[i].querySelector('.poster-title').innerText.toLowerCase();
-        let langs = posters[i].getAttribute('data-lang');
-        posters[i].style.display = (title.includes(query) && (currentLang === 'all' || langs.includes(currentLang))) ? 'block' : 'none';
-      }
-    }
+      const tagsBox = document.getElementById('watchTags');
+      tagsBox.innerHTML = '';
+      data.tags.forEach(t => {
+        tagsBox.innerHTML += `<span class="tag">${t}</span>`;
+      });
 
-    function openAnime(animeKey) {
-      const anime = animeDatabase[animeKey];
-      const container = document.getElementById('epButtonsContainer');
-      container.innerHTML = '';
-
-      anime.episodes.forEach((ep, index) => {
+      const epContainer = document.getElementById('epButtonsContainer');
+      epContainer.innerHTML = '';
+      data.episodes.forEach((ep, idx) => {
         const btn = document.createElement('button');
-        btn.className = 'ep-btn' + (index === 0 ? ' active' : '');
+        btn.className = 'ep-btn' + (idx === 0 ? ' active' : '');
         btn.innerText = ep.name;
         btn.onclick = function() {
           document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          playEpisode(anime.title + " - " + ep.name, ep.videoId);
+          document.getElementById('videoFrame').src = "https://www.youtube.com/embed/" + ep.videoId + "?autoplay=1";
         };
-        container.appendChild(btn);
+        epContainer.appendChild(btn);
       });
 
-      playEpisode(anime.title + " - " + anime.episodes[0].name, anime.episodes[0].videoId);
-      document.getElementById('playerModal').style.display = 'flex';
+      document.getElementById('videoFrame').src = "https://www.youtube.com/embed/" + data.episodes[0].videoId;
+      document.getElementById('watchView').style.display = 'block';
+      document.getElementById('homeFilters').style.display = 'none';
+      document.getElementById('gridHeading').innerText = 'Recommended Anime';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function playEpisode(fullTitle, videoId) {
-      document.getElementById('playerTitle').innerText = fullTitle;
-      document.getElementById('videoFrame').src = "https://www.youtube.com/embed/" + videoId;
-      document.getElementById('downloadLink').href = "https://www.youtube.com/watch?v=" + videoId;
-    }
-
-    function closePlayer() {
+    function goHome() {
       document.getElementById('videoFrame').src = '';
-      document.getElementById('playerModal').style.display = 'none';
+      document.getElementById('watchView').style.display = 'none';
+      document.getElementById('homeFilters').style.display = 'block';
+      document.getElementById('gridHeading').innerText = 'Latest Episodes';
+    }
+
+    function switchServer(btn) {
+      document.querySelectorAll('.srv-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const frame = document.getElementById('videoFrame');
+      frame.src = frame.src;
+    }
+
+    function selectLang(lang, el) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      filterCards();
+    }
+
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.getElementsByClassName('poster-card');
+      for (let i = 0; i < cards.length; i++) {
+        const title = cards[i].querySelector('.poster-title').innerText.toLowerCase();
+        const langs = cards[i].getAttribute('data-lang');
+        cards[i].style.display = (title.includes(q) && (currentLang === 'all' || langs.includes(currentLang))) ? 'block' : 'none';
+      }
     }
   </script>
 </body>
