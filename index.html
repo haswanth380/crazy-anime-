@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- మీ Google site verification meta tag ని ఇక్కడ కింద పేస్ట్ చేయండి -->
   <title>Crazy Andy - Stream Anime</title>
   <style>
     * { box-sizing: border-box; }
@@ -251,4 +250,153 @@
 
     <!-- LANGUAGE CHANGER -->
     <div id="homeFilters">
-      <div class="section-heading
+      <div class="section-heading">Watch in Your Own Language</div>
+      <div class="lang-row">
+        <div class="lang-card active" onclick="selectLang('all', this)">
+          <span class="lang-title">All</span><span class="lang-sub">అన్నీ</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('Telugu', this)">
+          <span class="lang-title">Telugu</span><span class="lang-sub">తెలుగు</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('Japanese', this)">
+          <span class="lang-title">Japanese</span><span class="lang-sub">日本語</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('English', this)">
+          <span class="lang-title">English</span><span class="lang-sub">Sub / Dub</span>
+        </div>
+        <div class="lang-card" onclick="selectLang('Hindi', this)">
+          <span class="lang-title">Hindi</span><span class="lang-sub">हिन्दी</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LATEST SERIES GRID -->
+    <div class="section-heading" id="listTitle">Latest Series</div>
+    <div class="poster-grid">
+
+      <!-- Card 1: Dragon Booster (Shaktishali Dragon) -->
+      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('dragonbooster', 1)">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Season 1</span>
+          <span class="badge-ep">13 Episodes</span>
+          <img id="cardPosterDragon" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.jpg" alt="Dragon Booster">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Dragon Booster (Shaktishali Dragon)</h4>
+          <div class="poster-meta">Telugu • Season 1 (Episodes)</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Unlimited Book of Spells -->
+      <div class="poster-card" data-lang="English Hindi" onclick="openCartoon('ubos', 1)">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Full Series</span>
+          <span class="badge-ep">26 Episodes</span>
+          <img id="cardPosterUbos" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.jpg" alt="Unlimited Book of Spells">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Unlimited Book of Spells</h4>
+          <div class="poster-meta">English • Hindi • Playlist</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function makePosterDataUrl(titleText, subText, accentColor) {
+      const svg =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="450" viewBox="0 0 320 450">' +
+        '<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0%" stop-color="#281a54"/>' +
+        '<stop offset="55%" stop-color="#140e2b"/>' +
+        '<stop offset="100%" stop-color="#090614"/>' +
+        '</linearGradient></defs>' +
+        '<rect width="320" height="450" fill="url(#bg)"/>' +
+        '<rect x="14" y="14" width="292" height="422" rx="14" fill="none" stroke="' + accentColor + '" stroke-width="2" opacity="0.6"/>' +
+        '<circle cx="160" cy="175" r="64" fill="#1e1440" stroke="' + accentColor + '" stroke-width="3"/>' +
+        '<text x="160" y="168" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">CRAZY ANDY</text>' +
+        '<text x="160" y="192" fill="' + accentColor + '" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">ANIME STREAM</text>' +
+        '<text x="160" y="285" fill="#ffffff" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle">' + titleText + '</text>' +
+        '<text x="160" y="316" fill="#cbbdf5" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">' + subText + '</text>' +
+        '</svg>';
+      return "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
+    }
+
+    const fallbackPosters = {
+      dragon: makePosterDataUrl("DRAGON BOOSTER", "Shaktishali Dragon • Telugu", "#ff9f1c"),
+      ubos: makePosterDataUrl("BOOK OF SPELLS", "26 Episodes • Fantasy", "#9d4edd")
+    };
+
+    function attachFallback(imgId, fallbackSrc) {
+      const img = document.getElementById(imgId);
+      if (!img) return;
+      img.addEventListener("error", function () {
+        if (img.src !== fallbackSrc) {
+          img.src = fallbackSrc;
+        }
+      });
+      if (img.complete && img.naturalWidth === 0) {
+        img.src = fallbackSrc;
+      }
+    }
+
+    attachFallback("cardPosterDragon", fallbackPosters.dragon);
+    attachFallback("cardPosterUbos", fallbackPosters.ubos);
+
+    const cartoons = {
+      dragonbooster: {
+        title: "Dragon Booster - Shaktishali Dragon (Telugu)",
+        poster: "https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.jpg",
+        fallback: fallbackPosters.dragon,
+        tags: ["Season 1", "13 Episodes", "Action", "Telugu Dub"],
+        desc: "Young Artha Penn is chosen by Beau, the legendary black-and-gold dragon of legend, to become the Dragon Booster (Shaktishali Dragon) and prevent a war between humans and dragons.",
+        type: "videos",
+        episodes: [
+          { name: "EP 1", videoId: "pjq_pYVQCMU" },
+          { name: "EP 2", videoId: "pjq_pYVQCMU" },
+          { name: "EP 3", videoId: "pjq_pYVQCMU" },
+          { name: "EP 4", videoId: "pjq_pYVQCMU" },
+          { name: "EP 5", videoId: "pjq_pYVQCMU" },
+          { name: "EP 6", videoId: "pjq_pYVQCMU" },
+          { name: "EP 7", videoId: "pjq_pYVQCMU" },
+          { name: "EP 8", videoId: "pjq_pYVQCMU" },
+          { name: "EP 9", videoId: "pjq_pYVQCMU" },
+          { name: "EP 10", videoId: "pjq_pYVQCMU" },
+          { name: "EP 11", videoId: "pjq_pYVQCMU" },
+          { name: "EP 12", videoId: "pjq_pYVQCMU" },
+          { name: "EP 13", videoId: "pjq_pYVQCMU" }
+        ],
+        directUrl: "https://youtu.be/pjq_pYVQCMU?si=jgP_lCrusMobJgl2"
+      },
+      ubos: {
+        title: "Unlimited Book of Spells",
+        poster: "https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.jpg",
+        fallback: fallbackPosters.ubos,
+        tags: ["Season 1", "26 Episodes", "Fantasy", "Magic"],
+        desc: "Cassy, Verne, and Gus attend the Ravenswood Academy for Wizards and Witches, using the Unlimited Book of Spells to stop the evil Zarlak from draining the Earth's magic.",
+        type: "playlist",
+        playlistId: "PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",
+        totalEpisodes: 26,
+        directUrl: "https://www.youtube.com/playlist?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP"
+      }
+    };
+
+    let currentLang = "all";
+
+    function setDirectLinks(url) {
+      document.getElementById("directYtLink").href = url;
+      document.getElementById("inlineDirectLink").href = url;
+    }
+
+    function openCartoon(key, epNum = 1) {
+      const item = cartoons[key];
+      if (!item) return;
+
+      const posterEl = document.getElementById("watchPoster");
+      posterEl.onerror = function () {
+        posterEl.src = item.fallback;
+      };
+      posterEl.src = item.poster || item.fallback;
+
+      document.getElementBy
