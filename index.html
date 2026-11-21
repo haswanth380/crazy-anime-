@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- మీ Google site verification meta tag ని ఇక్కడ కింద పేస్ట్ చేయండి -->
   <title>Crazy Andy - Stream Anime</title>
   <style>
     * { box-sizing: border-box; }
@@ -305,21 +306,22 @@
 
   <script>
     function makePosterDataUrl(titleText, subText, accentColor) {
-      const svg =
-        '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="450" viewBox="0 0 320 450">' +
-        '<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">' +
-        '<stop offset="0%" stop-color="#281a54"/>' +
-        '<stop offset="55%" stop-color="#140e2b"/>' +
-        '<stop offset="100%" stop-color="#090614"/>' +
-        '</linearGradient></defs>' +
-        '<rect width="320" height="450" fill="url(#bg)"/>' +
-        '<rect x="14" y="14" width="292" height="422" rx="14" fill="none" stroke="' + accentColor + '" stroke-width="2" opacity="0.6"/>' +
-        '<circle cx="160" cy="175" r="64" fill="#1e1440" stroke="' + accentColor + '" stroke-width="3"/>' +
-        '<text x="160" y="168" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">CRAZY ANDY</text>' +
-        '<text x="160" y="192" fill="' + accentColor + '" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">ANIME STREAM</text>' +
-        '<text x="160" y="285" fill="#ffffff" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle">' + titleText + '</text>' +
-        '<text x="160" y="316" fill="#cbbdf5" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">' + subText + '</text>' +
-        '</svg>';
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="450" viewBox="0 0 320 450">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#281a54"/>
+            <stop offset="55%" stop-color="#140e2b"/>
+            <stop offset="100%" stop-color="#090614"/>
+          </linearGradient>
+        </defs>
+        <rect width="320" height="450" fill="url(#bg)"/>
+        <rect x="14" y="14" width="292" height="422" rx="14" fill="none" stroke="${accentColor}" stroke-width="2" opacity="0.6"/>
+        <circle cx="160" cy="175" r="64" fill="#1e1440" stroke="${accentColor}" stroke-width="3"/>
+        <text x="160" y="168" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">CRAZY ANDY</text>
+        <text x="160" y="192" fill="${accentColor}" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">ANIME STREAM</text>
+        <text x="160" y="285" fill="#ffffff" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle">${titleText}</text>
+        <text x="160" y="316" fill="#cbbdf5" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">${subText}</text>
+      </svg>`;
       return "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svg)));
     }
 
@@ -382,21 +384,118 @@
       }
     };
 
-    let currentLang = "all";
+    let currentLang = 'all';
 
     function setDirectLinks(url) {
-      document.getElementById("directYtLink").href = url;
-      document.getElementById("inlineDirectLink").href = url;
+      document.getElementById('directYtLink').href = url;
+      document.getElementById('inlineDirectLink').href = url;
     }
 
     function openCartoon(key, epNum = 1) {
-      const item = cartoons[key];
-      if (!item) return;
+      try {
+        const item = cartoons[key];
+        if (!item) return;
 
-      const posterEl = document.getElementById("watchPoster");
-      posterEl.onerror = function () {
-        posterEl.src = item.fallback;
-      };
-      posterEl.src = item.poster || item.fallback;
+        const posterEl = document.getElementById('watchPoster');
+        posterEl.onerror = function () {
+          posterEl.src = item.fallback;
+        };
+        posterEl.src = item.poster || item.fallback;
 
-      document.getElementBy
+        document.getElementById('watchDesc').innerText = item.desc;
+
+        const tagsBox = document.getElementById('watchTags');
+        tagsBox.innerHTML = '';
+        item.tags.forEach(t => {
+          tagsBox.innerHTML += `<span class="tag">${t}</span>`;
+        });
+
+        const epContainer = document.getElementById('allEpisodesGrid');
+        epContainer.innerHTML = '';
+
+        if (item.type === "playlist") {
+          setDirectLinks(item.directUrl);
+          for (let i = 1; i <= item.totalEpisodes; i++) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'ep-btn' + (i === epNum ? ' active' : '');
+            btn.innerText = 'EP ' + i;
+            btn.onclick = function() {
+              document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              document.getElementById('watchHeading').innerText = item.title + ' - Episode ' + i;
+              document.getElementById('ytFrame').src = "https://www.youtube.com/embed/videoseries?list=" + encodeURIComponent(item.playlistId) + "&index=" + (i - 1) + "&rel=0&modestbranding=1";
+            };
+            epContainer.appendChild(btn);
+          }
+          document.getElementById('watchHeading').innerText = item.title + ' - Episode ' + epNum;
+          document.getElementById('ytFrame').src = "https://www.youtube.com/embed/videoseries?list=" + encodeURIComponent(item.playlistId) + "&index=" + (epNum - 1) + "&rel=0&modestbranding=1";
+        } else {
+          const startPos = Math.min(Math.max(epNum - 1, 0), item.episodes.length - 1);
+          item.episodes.forEach((ep, idx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'ep-btn' + (idx === startPos ? ' active' : '');
+            btn.innerText = ep.name;
+            btn.onclick = function() {
+              document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              document.getElementById('watchHeading').innerText = item.title + ' - ' + ep.name;
+              const epUrl = key === "dragonbooster"
+                ? "https://youtu.be/" + ep.videoId + "?si=jgP_lCrusMobJgl2"
+                : "https://youtu.be/" + ep.videoId;
+              setDirectLinks(epUrl);
+              document.getElementById('ytFrame').src = "https://www.youtube.com/embed/" + encodeURIComponent(ep.videoId) + "?autoplay=1&rel=0&modestbranding=1";
+            };
+            epContainer.appendChild(btn);
+          });
+          const activeEp = item.episodes[startPos];
+          const firstUrl = key === "dragonbooster"
+            ? "https://youtu.be/" + activeEp.videoId + "?si=jgP_lCrusMobJgl2"
+            : "https://youtu.be/" + activeEp.videoId;
+          setDirectLinks(firstUrl);
+          document.getElementById('watchHeading').innerText = item.title + ' - ' + activeEp.name;
+          document.getElementById('ytFrame').src = "https://www.youtube.com/embed/" + encodeURIComponent(activeEp.videoId) + "?rel=0&modestbranding=1";
+        }
+
+        document.getElementById('watchView').style.display = 'block';
+        document.getElementById('homeFilters').style.display = 'none';
+        document.getElementById('listTitle').innerText = 'Recommended';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error("openCartoon error:", err);
+      }
+    }
+
+    function closeWatch() {
+      document.getElementById('ytFrame').src = '';
+      document.getElementById('watchView').style.display = 'none';
+      document.getElementById('homeFilters').style.display = 'block';
+      document.getElementById('listTitle').innerText = currentLang === 'all' ? 'Latest Series' : currentLang + ' Series';
+      filterCards();
+    }
+
+    function selectLang(lang, el) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('active'));
+      if (el) el.classList.add('active');
+      document.getElementById('watchView').style.display = 'none';
+      document.getElementById('homeFilters').style.display = 'block';
+      document.getElementById('listTitle').innerText = lang === 'all' ? 'Latest Series' : lang + ' Series';
+      filterCards();
+    }
+
+    function filterCards() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('.poster-card');
+      cards.forEach(card => {
+        const title = card.querySelector('.poster-title').innerText.toLowerCase();
+        const langs = card.getAttribute('data-lang') || '';
+        const matchesLang = currentLang === 'all' || langs.toLowerCase().includes(currentLang.toLowerCase());
+        const matchesSearch = !q || title.includes(q);
+        card.style.display = (matchesLang && matchesSearch) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
