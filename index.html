@@ -100,7 +100,7 @@
         <div class="info"><h4>Unlimited Book of Spells</h4><p>English / Hindi</p></div>
       </div>
       <div class="card" data-lang="English" onclick="openShow('jca_arch')">
-        <div class="img-box"><span class="badge b-top">Archive</span><span class="badge b-bot">Jackie Chan</span><img src="https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg" alt=""></div>
+        <div class="img-box"><span class="badge b-top">Archive</span><span class="badge b-bot">Jackie Chan</span><img src="https://archive.org/services/img/jackie-chan-adventures-1080p-ai-upscale" onerror="this.src='https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg'" alt=""></div>
         <div class="info"><h4>Jackie Chan Adventures</h4><p>English • Internet Archive</p></div>
       </div>
       <div class="card" data-lang="English" onclick="openShow('db_en')">
@@ -124,6 +124,7 @@
 
   <script>
     var curLang="all";
+    var jcaId="jackie-chan-adventures-1080p-ai-upscale";
     var shows={
       db_te:{t:"Dragon Booster (Telugu)",p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",tags:["Telugu","39 Episodes","S1-S3"],d:"About: 39 episodes across Season 1 (13), Season 2 (13), and Season 3 (13).",eps:[["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["EP 8","xk5dCK0LUR0"],["EP 9","xa5hXhooInw"],["EP 10","TDckzfd4NxA"],["EP 11","jUdgYE61dc4"],["EP 12","2ZrK-u0SqIs"],["EP 13","NfWjpgv3Euc"],["S2 EP 1","j5Frq2WHMkI"],["S2 EP 2","d-ANeBW5YOE"],["S2 EP 3","MN2dH7f8EGs"],["S2 EP 4","Z80iAtUsRa0"],["S2 EP 5","RwjW7svwcgc"],["S2 EP 6","-Npjs8zbyHQ"],["S2 EP 7","ArbH-6lh1Os"],["S2 EP 8","j5Frq2WHMkI"],["S2 EP 9","Z80iAtUsRa0"],["S2 EP 10","RwjW7svwcgc"],["S2 EP 11","RwjW7svwcgc"],["S2 EP 12","-Npjs8zbyHQ"],["S2 EP 13","ArbH-6lh1Os"],["S3 EP 1","aQ_vVNmmYW0"],["S3 EP 2","Pf1P4ODuikc"],["S3 EP 3","73Qe5UUAv4c"],["S3 EP 4","FFG-Zng6Dbg"],["S3 EP 5","9ez1y3uu3rA"],["S3 EP 6","aQ_vVNmmYW0"],["S3 EP 7","Pf1P4ODuikc"],["S3 EP 8","FFG-Zng6Dbg"],["S3 EP 9","73Qe5UUAv4c"],["S3 EP 10","9ez1y3uu3rA"],["S3 EP 11","aQ_vVNmmYW0"],["S3 EP 12","Pf1P4ODuikc"],["S3 EP 13","FFG-Zng6Dbg"]]},
       sm_te:{t:"The Smurfs (Telugu)",p:"https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Smurfs outsmart Gargamel and Azrael in fun adventures.",eps:[["EP 1","-dEBQM6QvNo"],["EP 2","tBm57--ufmc"],["EP 3","COhZfnMW6iI"]]},
@@ -131,14 +132,20 @@
       ubos:{t:"Unlimited Book of Spells",p:"https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg",tags:["26 Eps","Magic"],d:"About: Cassy, Verne, and Gus stop Zarlak using magic.",plist:"PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",count:26},
       jca_arch:{
         t:"Jackie Chan Adventures (Internet Archive)",
-        p:"https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg",
+        p:"https://archive.org/services/img/jackie-chan-adventures-1080p-ai-upscale",
         tags:["Internet Archive","English"],
-        d:"About: Jackie Chan Adventures videos from Internet Archive.",
+        d:"About: Jackie Chan Adventures episodes from Internet Archive.",
         mode:"archive",
         eps:[
-          ["1080p AI Upscale","jackie-chan-adventures-1080p-ai-upscale"],
-          ["The Power Within VHS","Jackie_Chan_Adventures_The_Power_Within_2001_Columbia_Tristar_Tape"],
-          ["CN 2003 Tape","totallyspies-jackie-chan-adventures-young-hercules-x-men-ev"]
+          ["S1 EP 1",jcaId],["S1 EP 2",jcaId],["S1 EP 3",jcaId],["S1 EP 4",jcaId],["S1 EP 5",jcaId],["S1 EP 6",jcaId],
+          ["S1 EP 10",jcaId],["S1 EP 11",jcaId],["S1 EP 12",jcaId],["S1 EP 13",jcaId],
+          ["S2 EP 4",jcaId],["S2 EP 5",jcaId],["S2 EP 6",jcaId],["S2 EP 8",jcaId],["S2 EP 9",jcaId],["S2 EP 10",jcaId],
+          ["S2 EP 12",jcaId],["S2 EP 13",jcaId],["S2 EP 14",jcaId],["S2 EP 15",jcaId],["S2 EP 16",jcaId],["S2 EP 17",jcaId],
+          ["S2 EP 18",jcaId],["S2 EP 19",jcaId],["S2 EP 23",jcaId],["S2 EP 24",jcaId],["S2 EP 27",jcaId],
+          ["S2 EP 31",jcaId],["S2 EP 32",jcaId],["S2 EP 33",jcaId],["S2 EP 34",jcaId],["S2 EP 35",jcaId],["S2 EP 36",jcaId],["S2 EP 37",jcaId],
+          ["S3 EP 8",jcaId],["S3 EP 9",jcaId],["S3 EP 10",jcaId],["S3 EP 11",jcaId],["S3 EP 12",jcaId],["S3 EP 16",jcaId],["S3 EP 17",jcaId],
+          ["S4 EP 1",jcaId],["S4 EP 2",jcaId],["S4 EP 4",jcaId],["S4 EP 5",jcaId],["S4 EP 6",jcaId],["S4 EP 7",jcaId],["S4 EP 8",jcaId],["S4 EP 9",jcaId],
+          ["S5 EP 1",jcaId],["S5 EP 2",jcaId],["S5 EP 3",jcaId],["S5 EP 5",jcaId],["S5 EP 6",jcaId]
         ]
       },
       db_en:{t:"Dragon Booster (English)",p:"https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg",tags:["English","Action"],d:"About: English episode of Dragon Booster.",eps:[["EP 10","s1KFrb7DpnI"]]},
