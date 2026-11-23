@@ -3,543 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- మీ Google site verification meta tag ని ఇక్కడ కింద పేస్ట్ చేయండి -->
   <title>Crazy Andy - Stream Anime</title>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      background-color: #0f0c1d;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    nav {
-      background-color: #090712;
-      padding: 14px 25px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #7b2cbf;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      gap: 10px;
-    }
-    .logo { font-size: 25px; font-weight: bold; color: #ffffff; cursor: pointer; }
-    .logo span { color: #9d4edd; }
-    .nav-right { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .home-btn {
-      background: #241b4b; color: #fff; border: 1px solid #7b2cbf;
-      padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold;
-    }
-    .home-btn:hover { background: #7b2cbf; }
-    .search-box {
-      padding: 8px 16px; width: 230px; border-radius: 20px;
-      border: 1px solid #6c3ce9; background-color: #191433;
-      color: #ffffff; outline: none; font-size: 14px;
-    }
-    .container { max-width: 1150px; margin: auto; padding: 20px; }
-
-    /* Watch Player Section */
-    #watchView { display: none; margin-bottom: 30px; }
-    .anime-banner {
-      background: #181233;
-      border: 1px solid #35276b;
-      border-radius: 14px;
-      padding: 20px;
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 18px;
-    }
-    .banner-poster {
-      width: 145px;
-      height: 210px;
-      border-radius: 10px;
-      object-fit: cover;
-      border: 2px solid #8a4fff;
-      flex-shrink: 0;
-      background: #231b47;
-    }
-    .banner-details h1 { margin: 0 0 8px; font-size: 24px; color: #f3e8ff; }
-    .banner-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-    .tag {
-      background: #2b1f5c; color: #d8b4fe; font-size: 12px;
-      padding: 4px 10px; border-radius: 6px; font-weight: bold;
-    }
-    .overview-label { font-size: 13px; color: #9d4edd; font-weight: bold; margin-bottom: 4px; }
-    .overview-text { font-size: 14px; color: #cfc9e8; line-height: 1.5; margin: 0; }
-
-    .player-wrapper {
-      background: #000;
-      border: 2px solid #8a4fff;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .video-frame { width: 100%; height: 460px; border: none; display: block; }
-
-    .controls-panel {
-      background: #17122e;
-      border: 1px solid #2e2459;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-top: 15px;
-    }
-    .panel-title {
-      font-size: 14px; color: #e0aaff; font-weight: bold;
-      margin-bottom: 10px; display: block; border-left: 3px solid #9d4edd; padding-left: 8px;
-    }
-    .quality-tip { font-size: 12px; color: #b8aedc; margin-bottom: 12px; display: block; }
-    .ep-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-    .ep-btn {
-      background: #231b47; color: #ffffff; border: 1px solid #5a32c7;
-      padding: 8px 14px; border-radius: 8px; font-size: 13px;
-      font-weight: bold; cursor: pointer; min-width: 72px; text-align: center;
-    }
-    .ep-btn:hover, .ep-btn.active { background: #8a4fff; border-color: #ffffff; }
-    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; border-top: 1px solid #2e2459; padding-top: 12px; }
-    .action-btn {
-      background: #241b4b; color: #fff; border: 1px solid #9d4edd;
-      padding: 8px 15px; border-radius: 8px; font-weight: bold;
-      cursor: pointer; text-decoration: none; font-size: 13px;
-    }
-
-    /* Language Changer */
-    .section-heading {
-      font-size: 19px; font-weight: bold; margin: 22px 0 15px;
-      padding-left: 12px; border-left: 4px solid #8a4fff;
-    }
-    .lang-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
-    .lang-card {
-      background: #1c1538; border: 1px solid #5a32c7; border-radius: 10px;
-      min-width: 110px; padding: 12px 10px; text-align: center; cursor: pointer;
-    }
-    .lang-card.active, .lang-card:hover { background: #7b2cbf; border-color: #ffffff; }
-    .lang-title { font-weight: bold; font-size: 14px; display: block; }
-    .lang-sub { font-size: 11px; color: #d4c8ff; display: block; margin-top: 3px; }
-
-    /* Poster Grid */
-    .poster-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-      gap: 20px;
-    }
-    .poster-card {
-      background-color: #17122e; border-radius: 12px; overflow: hidden;
-      cursor: pointer; border: 2px solid #2b2154;
-    }
-    .poster-card:hover { border-color: #9d4edd; }
-    .poster-img-wrap {
-      position: relative; width: 100%; height: 255px;
-      background: #231b47;
-    }
-    .poster-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .badge-season {
-      position: absolute; top: 8px; left: 8px; background: rgba(15, 12, 29, 0.85);
-      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px;
-      border-radius: 6px; border: 1px solid #8a4fff;
-    }
-    .badge-ep {
-      position: absolute; bottom: 8px; left: 8px; background: #7b2cbf;
-      color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 6px;
-    }
-    .poster-info { padding: 12px; }
-    .poster-title { font-size: 15px; font-weight: bold; margin: 0; color: #f3e8ff; }
-    .poster-meta { font-size: 12px; color: #a59ec9; margin-top: 4px; }
-
-    @media (max-width: 650px) {
-      .anime-banner { flex-direction: column; align-items: center; text-align: center; }
-      .video-frame { height: 230px; }
-      .poster-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    *{box-sizing:border-box}
+    body{background:#0f0c1d;color:#fff;font-family:Arial,sans-serif;margin:0}
+    nav{background:#090712;padding:12px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;border-bottom:2px solid #7b2cbf;position:sticky;top:0;z-index:100;gap:10px}
+    .logo{font-size:22px;font-weight:bold;cursor:pointer}.logo span{color:#9d4edd}
+    .nav-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .btn{background:#241b4b;color:#fff;border:1px solid #7b2cbf;padding:7px 13px;border-radius:8px;cursor:pointer;font-weight:bold;text-decoration:none;font-size:13px}
+    .btn:hover,.btn.active{background:#8a4fff;border-color:#fff}
+    .search-box{padding:7px 14px;width:210px;border-radius:20px;border:1px solid #6c3ce9;background:#191433;color:#fff;outline:none}
+    .wrap{max-width:1150px;margin:auto;padding:18px}
+    #watchView{display:none;margin-bottom:25px}
+    .banner{background:#181233;border:1px solid #35276b;border-radius:12px;padding:16px;display:flex;gap:16px;align-items:flex-start;margin-bottom:14px}
+    .banner img{width:130px;height:185px;border-radius:8px;object-fit:cover;border:2px solid #8a4fff;background:#231b47;flex-shrink:0}
+    .banner h1{margin:0 0 6px;font-size:22px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+    .tag{background:#2b1f5c;color:#d8b4fe;font-size:11px;padding:3px 8px;border-radius:6px;font-weight:bold}
+    .desc{font-size:13px;color:#cfc9e8;line-height:1.4;margin:0}
+    .frame{width:100%;height:440px;border:2px solid #8a4fff;border-radius:12px;background:#000;display:block}
+    .panel{background:#17122e;border:1px solid #2e2459;border-radius:12px;padding:14px;margin-top:12px}
+    .ep-grid{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 12px}
+    .sec-title{font-size:18px;font-weight:bold;margin:20px 0 12px;padding-left:10px;border-left:4px solid #8a4fff}
+    .lang-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+    .lang-card{background:#1c1538;border:1px solid #5a32c7;border-radius:8px;min-width:100px;padding:10px;text-align:center;cursor:pointer;font-weight:bold;font-size:13px}
+    .lang-card.active,.lang-card:hover{background:#7b2cbf;border-color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+    .card{background:#17122e;border-radius:10px;overflow:hidden;cursor:pointer;border:2px solid #2b2154}
+    .card:hover{border-color:#9d4edd}
+    .img-box{position:relative;height:240px;background:#231b47}
+    .img-box img{width:100%;height:100%;object-fit:cover;display:block}
+    .badge{position:absolute;font-size:11px;font-weight:bold;padding:3px 7px;border-radius:6px;color:#fff}
+    .b-top{top:8px;left:8px;background:rgba(15,12,29,.85);border:1px solid #8a4fff}
+    .b-bot{bottom:8px;left:8px;background:#7b2cbf}
+    .info{padding:10px}.info h4{margin:0;font-size:14px}.info p{margin:4px 0 0;font-size:12px;color:#a59ec9}
+    @media(max-width:650px){.banner{flex-direction:column;align-items:center;text-align:center}.frame{height:220px}.grid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
-
   <nav>
     <div class="logo" onclick="goHome()">CRAZY <span>ANDY</span></div>
     <div class="nav-right">
-      <button type="button" class="home-btn" onclick="goHome()">Home</button>
-      <input type="text" id="searchInput" class="search-box" onkeyup="filterAll()" placeholder="Search anime...">
+      <button type="button" class="btn" onclick="goHome()">Home</button>
+      <input type="text" id="q" class="search-box" onkeyup="filterAll()" placeholder="Search anime...">
     </div>
   </nav>
 
-  <div class="container">
-
-    <!-- WATCH PLAYER & ABOUT SECTION -->
+  <div class="wrap">
     <div id="watchView">
-      <div class="anime-banner">
-        <img id="watchPoster" class="banner-poster" src="" alt="Poster">
-        <div class="banner-details">
-          <h1 id="watchHeading">Title</h1>
-          <div class="banner-tags" id="watchTags"></div>
-          <div class="overview-label">About / Overview</div>
-          <p class="overview-text" id="watchDesc"></p>
+      <div class="banner">
+        <img id="wPoster" src="" alt="">
+        <div>
+          <h1 id="wTitle"></h1>
+          <div class="tags" id="wTags"></div>
+          <p class="desc" id="wDesc"></p>
         </div>
       </div>
-
-      <div class="player-wrapper">
-        <iframe id="ytFrame" class="video-frame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-
-      <div class="controls-panel">
-        <span class="quality-tip">HD Quality Tip: Play avuthunnappudu kindha Settings lo high quality select chesukondi.</span>
-        <span class="panel-title">All Episodes:</span>
-        <div class="ep-grid" id="allEpisodesGrid"></div>
-        <div class="btn-row">
-          <button type="button" class="action-btn" onclick="goHome()" style="background:#ff4757; border:none;">Close Player</button>
-          <a id="directYtLink" href="#" target="_blank" class="action-btn">Open Direct Link</a>
+      <iframe id="ytFrame" class="frame" src="" allowfullscreen></iframe>
+      <div class="panel">
+        <b>Episodes:</b>
+        <div class="ep-grid" id="epGrid"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="button" class="btn" style="background:#ff4757;border:none" onclick="goHome()">Close</button>
+          <a id="ytLink" href="#" target="_blank" class="btn">Direct Link</a>
         </div>
       </div>
     </div>
 
-    <!-- LANGUAGE CHANGER -->
-    <div id="homeFilters">
-      <div class="section-heading">Watch in Your Own Language</div>
+    <div id="filters">
+      <div class="sec-title">Language</div>
       <div class="lang-row">
-        <div class="lang-card active" onclick="setLang('all', this)">
-          <span class="lang-title">All</span><span class="lang-sub">Anni</span>
-        </div>
-        <div class="lang-card" onclick="setLang('Telugu', this)">
-          <span class="lang-title">Telugu</span><span class="lang-sub">Telugu</span>
-        </div>
-        <div class="lang-card" onclick="setLang('Japanese', this)">
-          <span class="lang-title">Japanese</span><span class="lang-sub">Japanese</span>
-        </div>
-        <div class="lang-card" onclick="setLang('English', this)">
-          <span class="lang-title">English</span><span class="lang-sub">Sub / Dub</span>
-        </div>
-        <div class="lang-card" onclick="setLang('Hindi', this)">
-          <span class="lang-title">Hindi</span><span class="lang-sub">Hindi</span>
-        </div>
+        <div class="lang-card active" onclick="setLang('all',this)">All</div>
+        <div class="lang-card" onclick="setLang('Telugu',this)">Telugu</div>
+        <div class="lang-card" onclick="setLang('English',this)">English</div>
+        <div class="lang-card" onclick="setLang('Japanese',this)">Japanese</div>
+        <div class="lang-card" onclick="setLang('Hindi',this)">Hindi</div>
       </div>
     </div>
 
-    <!-- LATEST SERIES GRID -->
-    <div class="section-heading" id="listTitle">Latest Series</div>
-    <div class="poster-grid">
-
-      <!-- Card 1: Dragon Booster (Telugu) -->
-      <div class="poster-card" data-lang="Telugu" onclick="openShow('dragonbooster_te')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Telugu Dub</span>
-          <span class="badge-ep">17 Episodes</span>
-          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg'" alt="Dragon Booster">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Dragon Booster</h4>
-          <div class="poster-meta">Telugu - EP 1 to 17</div>
-        </div>
+    <div class="sec-title" id="secLabel">Series</div>
+    <div class="grid">
+      <div class="card" data-lang="Telugu" onclick="openShow('db_te')">
+        <div class="img-box"><span class="badge b-top">Telugu</span><span class="badge b-bot">S1-S3</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>Dragon Booster</h4><p>Telugu • Seasons 1-3</p></div>
       </div>
-
-      <!-- Card 2: The Smurfs (Telugu) -->
-      <div class="poster-card" data-lang="Telugu" onclick="openShow('smurfs_te')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Kushi TV</span>
-          <span class="badge-ep">3 Episodes</span>
-          <img src="https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg" alt="The Smurfs">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">The Smurfs</h4>
-          <div class="poster-meta">Telugu - 3 Episodes</div>
-        </div>
+      <div class="card" data-lang="Telugu" onclick="openShow('sm_te')">
+        <div class="img-box"><span class="badge b-top">Kushi TV</span><span class="badge b-bot">3 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/smurfs.png" onerror="this.src='https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>The Smurfs</h4><p>Telugu • 3 Episodes</p></div>
       </div>
-
-      <!-- Card 3: Creep School (Telugu) -->
-      <div class="poster-card" data-lang="Telugu" onclick="openShow('creepschool_te')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Kushi TV</span>
-          <span class="badge-ep">Telugu</span>
-          <img src="https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg" alt="Creep School">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Creep School</h4>
-          <div class="poster-meta">Telugu - Kushi TV Classic</div>
-        </div>
+      <div class="card" data-lang="Telugu" onclick="openShow('cs_te')">
+        <div class="img-box"><span class="badge b-top">Kushi TV</span><span class="badge b-bot">Telugu</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/creepschool.png" onerror="this.src='https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>Creep School</h4><p>Telugu • Episode</p></div>
       </div>
-
-      <!-- Card 4: Unlimited Book of Spells -->
-      <div class="poster-card" data-lang="English Hindi" onclick="openShow('ubos')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">Full Series</span>
-          <span class="badge-ep">26 Episodes</span>
-          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" alt="Unlimited Book of Spells">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Unlimited Book of Spells</h4>
-          <div class="poster-meta">English - Hindi - Playlist</div>
-        </div>
+      <div class="card" data-lang="English Hindi" onclick="openShow('ubos')">
+        <div class="img-box"><span class="badge b-top">Full</span><span class="badge b-bot">26 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" onerror="this.src='https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>Unlimited Book of Spells</h4><p>English / Hindi</p></div>
       </div>
-
-      <!-- Card 5: Dragon Booster (English) -->
-      <div class="poster-card" data-lang="English" onclick="openShow('dragonbooster_en')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">English</span>
-          <span class="badge-ep">Episodes</span>
-          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg'" alt="Dragon Booster English">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Dragon Booster (English)</h4>
-          <div class="poster-meta">English - Episodes</div>
-        </div>
+      <div class="card" data-lang="English" onclick="openShow('db_en')">
+        <div class="img-box"><span class="badge b-top">English</span><span class="badge b-bot">S01</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>Dragon Booster (EN)</h4><p>English • Episode</p></div>
       </div>
-
-      <!-- Card 6: The Smurfs (English) -->
-      <div class="poster-card" data-lang="English" onclick="openShow('smurfs_en')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">English</span>
-          <span class="badge-ep">3 Episodes</span>
-          <img src="https://i.ytimg.com/vi/EgdZQe_4sbc/hqdefault.jpg" alt="The Smurfs English">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">The Smurfs (English)</h4>
-          <div class="poster-meta">English - 3 Episodes</div>
-        </div>
+      <div class="card" data-lang="English" onclick="openShow('sm_en')">
+        <div class="img-box"><span class="badge b-top">English</span><span class="badge b-bot">3 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/smurfs.png" onerror="this.src='https://i.ytimg.com/vi/EgdZQe_4sbc/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>The Smurfs (EN)</h4><p>English • 3 Episodes</p></div>
       </div>
-
-      <!-- Card 7: Creep School (English) -->
-      <div class="poster-card" data-lang="English" onclick="openShow('creepschool_en')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">English</span>
-          <span class="badge-ep">Episodes</span>
-          <img src="https://i.ytimg.com/vi/qsfUFDG6Coc/hqdefault.jpg" alt="Creep School English">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Creep School (English)</h4>
-          <div class="poster-meta">English - Episodes</div>
-        </div>
+      <div class="card" data-lang="English" onclick="openShow('cs_en')">
+        <div class="img-box"><span class="badge b-top">English</span><span class="badge b-bot">2 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/creepschool.png" onerror="this.src='https://i.ytimg.com/vi/qsfUFDG6Coc/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>Creep School (EN)</h4><p>English • Episodes</p></div>
       </div>
-
-      <!-- Card 8: Master Raindrop (English) -->
-      <div class="poster-card" data-lang="English" onclick="openShow('raindrop_en')">
-        <div class="poster-img-wrap">
-          <span class="badge-season">English</span>
-          <span class="badge-ep">3 Episodes</span>
-          <img src="https://i.ytimg.com/vi/uP7xfgTi6Dg/hqdefault.jpg" alt="Master Raindrop English">
-        </div>
-        <div class="poster-info">
-          <h4 class="poster-title">Master Raindrop (English)</h4>
-          <div class="poster-meta">English - 3 Episodes</div>
-        </div>
+      <div class="card" data-lang="English" onclick="openShow('mr_en')">
+        <div class="img-box"><span class="badge b-top">English</span><span class="badge b-bot">3 Eps</span><img src="https://i.ytimg.com/vi/uP7xfgTi6Dg/hqdefault.jpg" alt=""></div>
+        <div class="info"><h4>Master Raindrop (EN)</h4><p>English • 3 Episodes</p></div>
       </div>
-
     </div>
   </div>
 
   <script>
-    var activeLang = "all";
-
-    var shows = {
-      dragonbooster_te: {
-        title: "Dragon Booster (Telugu)",
-        poster: "https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg",
-        tags: ["Telugu Dub", "Action", "Adventure"],
-        desc: "About Dragon Booster: Young Artha Penn is chosen by Beau, the legendary black-and-gold dragon, to become the Dragon Booster and prevent a war between humans and dragons.",
-        mode: "list",
-        eps: [
-          ["EP 1", "pjq_pYVQCMU"],
-          ["EP 2", "pjq_pYVQCMU"],
-          ["EP 3", "2ZrK-u0SqIs"],
-          ["EP 4", "pjq_pYVQCMU"],
-          ["EP 5", "pjq_pYVQCMU"],
-          ["EP 6", "pjq_pYVQCMU"],
-          ["EP 7", "pjq_pYVQCMU"],
-          ["EP 8", "pjq_pYVQCMU"],
-          ["EP 9", "pjq_pYVQCMU"],
-          ["EP 10", "pjq_pYVQCMU"],
-          ["EP 11", "pjq_pYVQCMU"],
-          ["EP 12", "pjq_pYVQCMU"],
-          ["EP 13", "pjq_pYVQCMU"],
-          ["EP 14", "d-ANeBW5YOE"],
-          ["EP 15", "MN2dH7f8EGs"],
-          ["EP 16", "9ez1y3uu3rA"],
-          ["EP 17", "73Qe5UUAv4c"]
-        ],
-        link: "https://youtu.be/pjq_pYVQCMU"
-      },
-      smurfs_te: {
-        title: "The Smurfs (Telugu)",
-        poster: "https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",
-        tags: ["Telugu Dub", "Kushi TV", "Comedy"],
-        desc: "About The Smurfs: Tiny blue creatures living in mushroom houses in the forest outsmart the evil wizard Gargamel and his cat Azrael.",
-        mode: "list",
-        eps: [
-          ["EP 1", "-dEBQM6QvNo"],
-          ["EP 2", "tBm57--ufmc"],
-          ["EP 3: AstroSmurf", "COhZfnMW6iI"]
-        ],
-        link: "https://www.youtube.com/watch?v=-dEBQM6QvNo"
-      },
-      creepschool_te: {
-        title: "Creep School (Telugu)",
-        poster: "https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg",
-        tags: ["Telugu Dub", "Kushi TV", "Mystery"],
-        desc: "About Creep School: Four kids accidentally board the wrong bus and end up at Creep School, a mysterious boarding school filled with friendly monsters.",
-        mode: "list",
-        eps: [
-          ["EP 1", "Qs4Si3yXEwI"]
-        ],
-        link: "https://youtu.be/Qs4Si3yXEwI"
-      },
-      ubos: {
-        title: "Unlimited Book of Spells",
-        poster: "https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png",
-        tags: ["26 Episodes", "Fantasy", "Magic"],
-        desc: "About Unlimited Book of Spells: Cassy, Verne, and Gus use the Unlimited Book of Spells at Ravenswood Academy to stop the evil Zarlak.",
-        mode: "playlist",
-        plist: "PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",
-        count: 26,
-        link: "https://www.youtube.com/playlist?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP"
-      },
-      dragonbooster_en: {
-        title: "Dragon Booster (English)",
-        poster: "https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg",
-        tags: ["English", "Action", "Adventure"],
-        desc: "About Dragon Booster (English): Young Artha Penn teams up with Beau to race and protect peace between humans and dragons.",
-        mode: "list",
-        eps: [
-          ["S01 E10", "s1KFrb7DpnI"]
-        ],
-        link: "https://www.youtube.com/watch?v=s1KFrb7DpnI"
-      },
-      smurfs_en: {
-        title: "The Smurfs (English)",
-        poster: "https://i.ytimg.com/vi/EgdZQe_4sbc/hqdefault.jpg",
-        tags: ["English", "Adventure", "Comedy"],
-        desc: "About The Smurfs (English): Classic and 3D adventures of the Smurfs outsmarting Gargamel.",
-        mode: "list",
-        eps: [
-          ["EP 1", "EgdZQe_4sbc"],
-          ["EP 2", "7zQoiPhHiag"],
-          ["Compilation", "zATUolr06Hs"]
-        ],
-        link: "https://www.youtube.com/watch?v=EgdZQe_4sbc"
-      },
-      creepschool_en: {
-        title: "Creep School (English)",
-        poster: "https://i.ytimg.com/vi/qsfUFDG6Coc/hqdefault.jpg",
-        tags: ["English", "Mystery", "Comedy"],
-        desc: "About Creep School (English): Four kids find themselves at Creep School with friendly monsters and spooky fun.",
-        mode: "list",
-        eps: [
-          ["S01 E01", "qsfUFDG6Coc"],
-          ["All Episodes", "pemxIGJr91o"]
-        ],
-        link: "https://www.youtube.com/watch?v=qsfUFDG6Coc"
-      },
-      raindrop_en: {
-        title: "Master Raindrop (English)",
-        poster: "https://i.ytimg.com/vi/uP7xfgTi6Dg/hqdefault.jpg",
-        tags: ["English", "Fantasy", "Adventure"],
-        desc: "About Master Raindrop (English): Follow Raindrop on elemental adventures with friends.",
-        mode: "list",
-        eps: [
-          ["EP 1: Courage", "uP7xfgTi6Dg"],
-          ["EP 17: Friendship", "g4xM9gFr510"],
-          ["EP 26: Wisdom", "6FKTTueY_mg"]
-        ],
-        link: "https://www.youtube.com/watch?v=uP7xfgTi6Dg"
-      }
+    var curLang="all";
+    var shows={
+      db_te:{t:"Dragon Booster (Telugu)",p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",tags:["Telugu","S1-S3"],d:"About: Artha Penn and Beau fight to keep peace between humans and dragons.",eps:[["S1 EP1","xa5hXhooInw"],["S1 EP2","jUdgYE61dc4"],["S1 EP1-5","Ni2OIvjELjo"],["S1 EP6-10","puZUl1J1BG4"],["S2 EP1-5","d-ANeBW5YOE"],["S2 EP6-10","MN2dH7f8EGs"],["S2 EP11","RwjW7svwcgc"],["S2 EP11-12","-Npjs8zbyHQ"],["S3 EP1","aQ_vVNmmYW0"],["S3 EP1-7","9ez1y3uu3rA"],["S3 EP4","73Qe5UUAv4c"],["S3 EP8","FFG-Zng6Dbg"]]},
+      sm_te:{t:"The Smurfs (Telugu)",p:"https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Smurfs outsmart Gargamel and Azrael in fun adventures.",eps:[["EP 1","-dEBQM6QvNo"],["EP 2","tBm57--ufmc"],["EP 3","COhZfnMW6iI"]]},
+      cs_te:{t:"Creep School (Telugu)",p:"https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Kids end up at Creep School full of friendly monsters.",eps:[["EP 1","Qs4Si3yXEwI"]]},
+      ubos:{t:"Unlimited Book of Spells",p:"https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg",tags:["26 Eps","Magic"],d:"About: Cassy, Verne, and Gus stop Zarlak using magic.",plist:"PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",count:26},
+      db_en:{t:"Dragon Booster (English)",p:"https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg",tags:["English","Action"],d:"About: English episodes of Dragon Booster.",eps:[["S01 E10","s1KFrb7DpnI"]]},
+      sm_en:{t:"The Smurfs (English)",p:"https://i.ytimg.com/vi/EgdZQe_4sbc/hqdefault.jpg",tags:["English","Comedy"],d:"About: English adventures of The Smurfs.",eps:[["EP 1","EgdZQe_4sbc"],["EP 2","7zQoiPhHiag"],["Pack","zATUolr06Hs"]]},
+      cs_en:{t:"Creep School (English)",p:"https://i.ytimg.com/vi/qsfUFDG6Coc/hqdefault.jpg",tags:["English","Mystery"],d:"About: English episodes of Creep School.",eps:[["S01 E01","qsfUFDG6Coc"],["All","pemxIGJr91o"]]},
+      mr_en:{t:"Master Raindrop (English)",p:"https://i.ytimg.com/vi/uP7xfgTi6Dg/hqdefault.jpg",tags:["English","Fantasy"],d:"About: Master Raindrop English episodes.",eps:[["EP 1","uP7xfgTi6Dg"],["EP 17","g4xM9gFr510"],["EP 26","6FKTTueY_mg"]]}
     };
 
-    function playVid(vid, titleText, auto) {
-      document.getElementById("watchHeading").innerText = titleText;
-      document.getElementById("ytFrame").src = "https://www.youtube.com/embed/" + vid + "?" + (auto ? "autoplay=1&" : "") + "rel=0";
-      document.getElementById("directYtLink").href = "https://www.youtube.com/watch?v=" + vid;
+    function playEp(vid,label,auto){
+      document.getElementById("wTitle").innerText=label;
+      document.getElementById("ytFrame").src="https://www.youtube.com/embed/"+vid+"?"+(auto?"autoplay=1&":"")+"rel=0";
+      document.getElementById("ytLink").href="https://www.youtube.com/watch?v="+vid;
     }
 
-    function openShow(key) {
-      var s = shows[key];
-      if (!s) return;
-
-      document.getElementById("watchPoster").src = s.poster;
-      document.getElementById("watchDesc").innerText = s.desc;
-      document.getElementById("directYtLink").href = s.link;
-
-      var tagHtml = "";
-      for (var i = 0; i < s.tags.length; i++) {
-        tagHtml += '<span class="tag">' + s.tags[i] + '</span>';
-      }
-      document.getElementById("watchTags").innerHTML = tagHtml;
-
-      var grid = document.getElementById("allEpisodesGrid");
-      grid.innerHTML = "";
-
-      if (s.mode === "playlist") {
-        for (var p = 1; p <= s.count; p++) {
-          var b = document.createElement("button");
-          b.type = "button";
-          b.className = "ep-btn" + (p === 1 ? " active" : "");
-          b.innerText = "EP " + p;
-          b.setAttribute("data-idx", p);
-          b.onclick = function() {
-            var idx = parseInt(this.getAttribute("data-idx"), 10);
-            var allB = grid.getElementsByTagName("button");
-            for (var k = 0; k < allB.length; k++) allB[k].className = "ep-btn";
-            this.className = "ep-btn active";
-            document.getElementById("watchHeading").innerText = s.title + " - Episode " + idx;
-            document.getElementById("ytFrame").src = "https://www.youtube.com/embed?listType=playlist&list=" + s.plist + "&index=" + (idx - 1) + "&rel=0";
+    function openShow(k){
+      var s=shows[k];if(!s)return;
+      document.getElementById("wPoster").src=s.p;
+      document.getElementById("wDesc").innerText=s.d;
+      document.getElementById("wTags").innerHTML=s.tags.map(function(x){return'<span class="tag">'+x+'</span>';}).join("");
+      var g=document.getElementById("epGrid");g.innerHTML="";
+      if(s.plist){
+        for(var i=1;i<=s.count;i++){
+          var b=document.createElement("button");b.type="button";b.className="btn"+(i===1?" active":"");b.innerText="EP "+i;
+          b.setAttribute("data-i",i);
+          b.onclick=function(){
+            var idx=parseInt(this.getAttribute("data-i"),10);
+            var all=g.getElementsByTagName("button");for(var n=0;n<all.length;n++)all[n].className="btn";
+            this.className="btn active";
+            document.getElementById("wTitle").innerText=s.t+" - EP "+idx;
+            document.getElementById("ytFrame").src="https://www.youtube.com/embed?listType=playlist&list="+s.plist+"&index="+(idx-1)+"&rel=0";
           };
-          grid.appendChild(b);
+          g.appendChild(b);
         }
-        document.getElementById("watchHeading").innerText = s.title + " - Episode 1";
-        document.getElementById("ytFrame").src = "https://www.youtube.com/embed?listType=playlist&list=" + s.plist + "&index=0&rel=0";
-      } else {
-        for (var e = 0; e < s.eps.length; e++) {
-          var btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "ep-btn" + (e === 0 ? " active" : "");
-          btn.innerText = s.eps[e][0];
-          btn.setAttribute("data-vid", s.eps[e][1]);
-          btn.setAttribute("data-name", s.eps[e][0]);
-          btn.onclick = function() {
-            var allB = grid.getElementsByTagName("button");
-            for (var k = 0; k < allB.length; k++) allB[k].className = "ep-btn";
-            this.className = "ep-btn active";
-            playVid(this.getAttribute("data-vid"), s.title + " - " + this.getAttribute("data-name"), true);
+        document.getElementById("wTitle").innerText=s.t+" - EP 1";
+        document.getElementById("ytFrame").src="https://www.youtube.com/embed?listType=playlist&list="+s.plist+"&index=0&rel=0";
+        document.getElementById("ytLink").href="https://www.youtube.com/playlist?list="+s.plist;
+      }else{
+        for(var e=0;e<s.eps.length;e++){
+          var btn=document.createElement("button");btn.type="button";btn.className="btn"+(e===0?" active":"");btn.innerText=s.eps[e][0];
+          btn.setAttribute("data-v",s.eps[e][1]);btn.setAttribute("data-n",s.eps[e][0]);
+          btn.onclick=function(){
+            var all=g.getElementsByTagName("button");for(var n=0;n<all.length;n++)all[n].className="btn";
+            this.className="btn active";
+            playEp(this.getAttribute("data-v"),s.t+" - "+this.getAttribute("data-n"),true);
           };
-          grid.appendChild(btn);
+          g.appendChild(btn);
         }
-        playVid(s.eps[0][1], s.title + " - " + s.eps[0][0], false);
+        playEp(s.eps[0][1],s.t+" - "+s.eps[0][0],false);
       }
-
-      document.getElementById("watchView").style.display = "block";
-      document.getElementById("homeFilters").style.display = "none";
-      document.getElementById("listTitle").innerText = "Recommended";
-      window.scrollTo(0, 0);
+      document.getElementById("watchView").style.display="block";
+      document.getElementById("filters").style.display="none";
+      document.getElementById("secLabel").innerText="Recommended";
+      window.scrollTo(0,0);
     }
 
-    function goHome() {
-      document.getElementById("ytFrame").src = "";
-      document.getElementById("watchView").style.display = "none";
-      document.getElementById("homeFilters").style.display = "block";
-      document.getElementById("listTitle").innerText = "Latest Series";
+    function goHome(){
+      document.getElementById("ytFrame").src="";
+      document.getElementById("watchView").style.display="none";
+      document.getElementById("filters").style.display="block";
+      document.getElementById("secLabel").innerText="Series";
     }
 
-    function setLang(lang, el) {
-      activeLang = lang;
-      var lCards = document.getElementsByClassName("lang-card");
-      for (var i = 0; i < lCards.length; i++) {
-        lCards[i].className = "lang-card";
-      }
-      el.className = "lang-card active";
+    function setLang(l,el){
+      curLang=l;
+      var c=document.getElementsByClassName("lang-card");
+      for(var i=0;i<c.length;i++)c[i].className="lang-card";
+      el.className="lang-card active";
       filterAll();
     }
 
-    function filterAll() {
-      var q = document.getElementById("searchInput").value.toLowerCase();
-      var cards = document.getElementsByClassName("poster-card");
-      for (var i = 0; i < cards.length; i++) {
-        var title = cards[i].getElementsByTagName("h4")[0].innerText.toLowerCase();
-        var langs = cards[i].getAttribute("data-lang");
-        var matchText = title.indexOf(q) !== -1;
-        var matchLang = (activeLang === "all" || langs.indexOf(activeLang) !== -1);
-        cards[i].style.display = (matchText && matchLang) ? "block" : "none";
+    function filterAll(){
+      var q=document.getElementById("q").value.toLowerCase();
+      var cards=document.getElementsByClassName("card");
+      for(var i=0;i<cards.length;i++){
+        var title=cards[i].getElementsByTagName("h4")[0].innerText.toLowerCase();
+        var langs=cards[i].getAttribute("data-lang");
+        cards[i].style.display=(title.indexOf(q)!==-1&&(curLang==="all"||langs.indexOf(curLang)!==-1))?"block":"none";
       }
     }
   </script>
-
 </body>
 </html>
