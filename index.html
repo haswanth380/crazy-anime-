@@ -97,27 +97,6 @@
     .quality-tip {
       font-size: 12px; color: #b8aedc; margin-bottom: 12px; display: block;
     }
-    .season-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .season-btn {
-      background: #1c1538;
-      color: #d8b4fe;
-      border: 1px solid #7b2cbf;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .season-btn.active, .season-btn:hover {
-      background: #7b2cbf;
-      color: #ffffff;
-      border-color: #ffffff;
-    }
     .ep-grid {
       display: flex;
       flex-wrap: wrap;
@@ -213,7 +192,7 @@
   <nav>
     <div class="logo" id="logoBtn">CRAZY <span>ANDY</span></div>
     <div class="nav-right">
-      <button class="home-btn" id="homeBtn">🏠 Home</button>
+      <button class="home-btn" id="homeBtn">Home</button>
       <input type="text" id="searchInput" class="search-box" placeholder="Search anime...">
     </div>
   </nav>
@@ -237,19 +216,14 @@
       </div>
 
       <div class="controls-panel">
-        <span class="quality-tip">💡 <b>HD Quality Tip:</b> వీడియో ప్లే అవుతున్నప్పుడు కింద ఉన్న <b>Settings (⚙️) → Quality</b> లో హై క్వాలిటీ సెలెక్ట్ చేసుకోండి.</span>
-
-        <div id="seasonSelectorBox" style="display:none;">
-          <span class="panel-title">Select Season:</span>
-          <div class="season-row" id="seasonButtons"></div>
-        </div>
+        <span class="quality-tip">HD Quality Tip: వీడియో ప్లే అవుతున్నప్పుడు కింద ఉన్న Settings లో హై క్వాలిటీ సెలెక్ట్ చేసుకోండి.</span>
 
         <span class="panel-title">All Episodes:</span>
         <div class="ep-grid" id="allEpisodesGrid"></div>
 
         <div class="btn-row">
-          <button class="action-btn" id="closePlayerBtn" style="background:#ff4757; border:none;">✕ Close Player</button>
-          <a id="directYtLink" href="#" target="_blank" class="action-btn">▶ Open Direct Link</a>
+          <button class="action-btn" id="closePlayerBtn" style="background:#ff4757; border:none;">Close Player</button>
+          <a id="directYtLink" href="#" target="_blank" class="action-btn">Open Direct Link</a>
         </div>
       </div>
     </div>
@@ -280,16 +254,16 @@
     <div class="section-heading" id="listTitle">Latest Series</div>
     <div class="poster-grid" id="posterGrid">
 
-      <!-- Card 1: Dragon Booster (Seasons 1, 2, 3) -->
+      <!-- Card 1: Dragon Booster -->
       <div class="poster-card" data-cartoon="dragonbooster" data-lang="Telugu">
         <div class="poster-img-wrap">
-          <span class="badge-season">Seasons 1–3</span>
-          <span class="badge-ep">Telugu Dub</span>
+          <span class="badge-season">Telugu Dub</span>
+          <span class="badge-ep">17 Episodes</span>
           <img class="card-poster-img" data-fallback="https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" alt="Dragon Booster">
         </div>
         <div class="poster-info">
           <h4 class="poster-title">Dragon Booster</h4>
-          <div class="poster-meta">Telugu • Season 1, 2 & 3</div>
+          <div class="poster-meta">Telugu - EP 1 to 17</div>
         </div>
       </div>
 
@@ -302,7 +276,7 @@
         </div>
         <div class="poster-info">
           <h4 class="poster-title">The Smurfs</h4>
-          <div class="poster-meta">Telugu • 3 Episodes</div>
+          <div class="poster-meta">Telugu - 3 Episodes</div>
         </div>
       </div>
 
@@ -315,7 +289,7 @@
         </div>
         <div class="poster-info">
           <h4 class="poster-title">Unlimited Book of Spells</h4>
-          <div class="poster-meta">English • Hindi • Playlist</div>
+          <div class="poster-meta">English - Hindi - Playlist</div>
         </div>
       </div>
 
@@ -328,7 +302,7 @@
         </div>
         <div class="poster-info">
           <h4 class="poster-title">Creep School</h4>
-          <div class="poster-meta">Telugu • Kushi TV Classic</div>
+          <div class="poster-meta">Telugu - Kushi TV Classic</div>
         </div>
       </div>
 
@@ -336,29 +310,178 @@
   </div>
 
   <script>
-    window.addEventListener("DOMContentLoaded", function() {
+    (function() {
       var cartoons = {
         dragonbooster: {
           title: "Dragon Booster (Telugu)",
           poster: "https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg",
-          tags: ["Season 1", "Season 2", "Season 3", "Telugu Dub"],
+          tags: ["Telugu Dub", "Action", "Adventure", "Episodes"],
           desc: "Young Artha Penn is chosen by Beau, the legendary black-and-gold dragon of legend, to become the Dragon Booster and prevent a war between humans and dragons.",
-          type: "seasons",
-          seasons: [
-            {
-              name: "Season 1",
-              episodes: [
-                { name: "EP 1", videoId: "pjq_pYVQCMU" },
-                { name: "EP 3: Into The Fire", videoId: "2ZrK-u0SqIs" }
-              ]
-            },
-            {
-              name: "Season 2",
-              episodes: [
-                { name: "EP 1 to 5 (Full)", videoId: "d-ANeBW5YOE" },
-                { name: "EP 6 to 10 (Full)", videoId: "MN2dH7f8EGs" }
-              ]
-            },
-            {
-              name: "Season 3",
-              episodes: [
+          type: "videos",
+          episodes: [
+            { name: "EP 1", videoId: "pjq_pYVQCMU" },
+            { name: "EP 2", videoId: "pjq_pYVQCMU" },
+            { name: "EP 3", videoId: "2ZrK-u0SqIs" },
+            { name: "EP 4", videoId: "pjq_pYVQCMU" },
+            { name: "EP 5", videoId: "pjq_pYVQCMU" },
+            { name: "EP 6", videoId: "pjq_pYVQCMU" },
+            { name: "EP 7", videoId: "pjq_pYVQCMU" },
+            { name: "EP 8", videoId: "pjq_pYVQCMU" },
+            { name: "EP 9", videoId: "pjq_pYVQCMU" },
+            { name: "EP 10", videoId: "pjq_pYVQCMU" },
+            { name: "EP 11", videoId: "pjq_pYVQCMU" },
+            { name: "EP 12", videoId: "pjq_pYVQCMU" },
+            { name: "EP 13", videoId: "pjq_pYVQCMU" },
+            { name: "EP 14", videoId: "d-ANeBW5YOE" },
+            { name: "EP 15", videoId: "MN2dH7f8EGs" },
+            { name: "EP 16", videoId: "9ez1y3uu3rA" },
+            { name: "EP 17", videoId: "73Qe5UUAv4c" }
+          ],
+          directUrl: "https://youtu.be/pjq_pYVQCMU"
+        },
+        smurfs: {
+          title: "The Smurfs (Telugu)",
+          poster: "https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",
+          tags: ["Telugu Dub", "Kushi TV", "Adventure", "Comedy"],
+          desc: "Tiny blue creatures living in mushroom houses in the forest outsmart the evil wizard Gargamel and his cat Azrael in fun-filled adventures.",
+          type: "videos",
+          episodes: [
+            { name: "EP 1", videoId: "-dEBQM6QvNo" },
+            { name: "EP 2", videoId: "tBm57--ufmc" },
+            { name: "EP 3", videoId: "COhZfnMW6iI" }
+          ],
+          directUrl: "https://www.youtube.com/watch?v=-dEBQM6QvNo"
+        },
+        ubos: {
+          title: "Unlimited Book of Spells",
+          poster: "https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png",
+          tags: ["Season 1", "26 Episodes", "Fantasy", "Magic"],
+          desc: "Cassy, Verne, and Gus attend the Ravenswood Academy for Wizards and Witches, using the Unlimited Book of Spells to stop the evil Zarlak from draining the Earth's magic.",
+          type: "playlist",
+          playlistId: "PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",
+          totalEpisodes: 26,
+          directUrl: "https://www.youtube.com/playlist?list=PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP"
+        },
+        creepschool: {
+          title: "Creep School",
+          poster: "https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg",
+          tags: ["Telugu Dub", "Kushi TV", "Mystery", "Comedy"],
+          desc: "Four kids accidentally board the wrong bus and end up at Creep School, a mysterious boarding school filled with friendly monsters, ghosts, and supernatural adventures.",
+          type: "videos",
+          episodes: [
+            { name: "EP 1", videoId: "Qs4Si3yXEwI" }
+          ],
+          directUrl: "https://youtu.be/Qs4Si3yXEwI"
+        }
+      };
+
+      var currentLang = "all";
+
+      function playVideoById(videoId, headingText, autoplay) {
+        var frame = document.getElementById("ytFrame");
+        var link = document.getElementById("directYtLink");
+        var heading = document.getElementById("watchHeading");
+        heading.innerText = headingText;
+        frame.src = "https://www.youtube.com/embed/" + videoId + "?" + (autoplay ? "autoplay=1&" : "") + "rel=0&modestbranding=1";
+        link.href = "https://www.youtube.com/watch?v=" + videoId;
+      }
+
+      function openCartoon(key, epNum) {
+        var item = cartoons[key];
+        if (!item) return;
+
+        document.getElementById("watchPoster").src = item.poster;
+        document.getElementById("watchDesc").innerText = item.desc;
+        document.getElementById("directYtLink").href = item.directUrl;
+
+        var tagsBox = document.getElementById("watchTags");
+        tagsBox.innerHTML = "";
+        item.tags.forEach(function(t) {
+          var span = document.createElement("span");
+          span.className = "tag";
+          span.innerText = t;
+          tagsBox.appendChild(span);
+        });
+
+        var epContainer = document.getElementById("allEpisodesGrid");
+        epContainer.innerHTML = "";
+
+        if (item.type === "playlist") {
+          for (var i = 1; i <= item.totalEpisodes; i++) {
+            (function(epIndex) {
+              var btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = "ep-btn" + (epIndex === epNum ? " active" : "");
+              btn.innerText = "EP " + epIndex;
+              btn.addEventListener("click", function() {
+                document.querySelectorAll(".ep-btn").forEach(function(b) { b.classList.remove("active"); });
+                btn.classList.add("active");
+                document.getElementById("watchHeading").innerText = item.title + " - Episode " + epIndex;
+                document.getElementById("ytFrame").src = "https://www.youtube.com/embed?listType=playlist&list=" + item.playlistId + "&index=" + (epIndex - 1) + "&rel=0&modestbranding=1";
+              });
+              epContainer.appendChild(btn);
+            })(i);
+          }
+          document.getElementById("watchHeading").innerText = item.title + " - Episode " + epNum;
+          document.getElementById("ytFrame").src = "https://www.youtube.com/embed?listType=playlist&list=" + item.playlistId + "&index=" + (epNum - 1) + "&rel=0&modestbranding=1";
+        } else {
+          item.episodes.forEach(function(ep, idx) {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "ep-btn" + (idx === 0 ? " active" : "");
+            btn.innerText = ep.name;
+            btn.addEventListener("click", function() {
+              document.querySelectorAll(".ep-btn").forEach(function(b) { b.classList.remove("active"); });
+              btn.classList.add("active");
+              playVideoById(ep.videoId, item.title + " - " + ep.name, true);
+            });
+            epContainer.appendChild(btn);
+          });
+          if (item.episodes.length > 0) {
+            playVideoById(item.episodes[0].videoId, item.title + " - " + item.episodes[0].name, false);
+          }
+        }
+
+        document.getElementById("watchView").style.display = "block";
+        document.getElementById("homeFilters").style.display = "none";
+        document.getElementById("listTitle").innerText = "Recommended";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function closeWatch() {
+        document.getElementById("ytFrame").src = "";
+        document.getElementById("watchView").style.display = "none";
+        document.getElementById("homeFilters").style.display = "block";
+        document.getElementById("listTitle").innerText = "Latest Series";
+      }
+
+      function filterCards() {
+        var q = document.getElementById("searchInput").value.toLowerCase();
+        var cards = document.getElementsByClassName("poster-card");
+        for (var i = 0; i < cards.length; i++) {
+          var title = cards[i].querySelector(".poster-title").innerText.toLowerCase();
+          var langs = cards[i].getAttribute("data-lang");
+          cards[i].style.display = (title.indexOf(q) !== -1 && (currentLang === "all" || langs.indexOf(currentLang) !== -1)) ? "block" : "none";
+        }
+      }
+
+      function initApp() {
+        document.querySelectorAll(".card-poster-img").forEach(function(imgEl) {
+          imgEl.addEventListener("error", function() {
+            var fb = imgEl.getAttribute("data-fallback");
+            if (fb && imgEl.src !== fb) {
+              imgEl.src = fb;
+            }
+          });
+        });
+
+        document.querySelectorAll(".poster-card").forEach(function(card) {
+          card.addEventListener("click", function() {
+            var key = card.getAttribute("data-cartoon");
+            openCartoon(key, 1);
+          });
+        });
+
+        document.querySelectorAll(".lang-card").forEach(function(langCard) {
+          langCard.addEventListener("click", function() {
+            currentLang = langCard.getAttribute("
