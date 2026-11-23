@@ -211,10 +211,10 @@
 
   <!-- Top Navbar with Search Bar -->
   <nav>
-    <div class="logo" onclick="closeWatch()">CRAZY <span>ANDY</span></div>
+    <div class="logo" id="logoBtn">CRAZY <span>ANDY</span></div>
     <div class="nav-right">
-      <button class="home-btn" onclick="closeWatch()">🏠 Home</button>
-      <input type="text" id="searchInput" class="search-box" onkeyup="filterCards()" placeholder="Search anime...">
+      <button class="home-btn" id="homeBtn">🏠 Home</button>
+      <input type="text" id="searchInput" class="search-box" placeholder="Search anime...">
     </div>
   </nav>
 
@@ -248,7 +248,7 @@
         <div class="ep-grid" id="allEpisodesGrid"></div>
 
         <div class="btn-row">
-          <button class="action-btn" onclick="closeWatch()" style="background:#ff4757; border:none;">✕ Close Player</button>
+          <button class="action-btn" id="closePlayerBtn" style="background:#ff4757; border:none;">✕ Close Player</button>
           <a id="directYtLink" href="#" target="_blank" class="action-btn">▶ Open Direct Link</a>
         </div>
       </div>
@@ -257,20 +257,20 @@
     <!-- LANGUAGE CHANGER -->
     <div id="homeFilters">
       <div class="section-heading">Watch in Your Own Language</div>
-      <div class="lang-row">
-        <div class="lang-card active" onclick="selectLang('all', this)">
+      <div class="lang-row" id="langRow">
+        <div class="lang-card active" data-lang-filter="all">
           <span class="lang-title">All</span><span class="lang-sub">అన్నీ</span>
         </div>
-        <div class="lang-card" onclick="selectLang('Telugu', this)">
+        <div class="lang-card" data-lang-filter="Telugu">
           <span class="lang-title">Telugu</span><span class="lang-sub">తెలుగు</span>
         </div>
-        <div class="lang-card" onclick="selectLang('Japanese', this)">
+        <div class="lang-card" data-lang-filter="Japanese">
           <span class="lang-title">Japanese</span><span class="lang-sub">日本語</span>
         </div>
-        <div class="lang-card" onclick="selectLang('English', this)">
+        <div class="lang-card" data-lang-filter="English">
           <span class="lang-title">English</span><span class="lang-sub">Sub / Dub</span>
         </div>
-        <div class="lang-card" onclick="selectLang('Hindi', this)">
+        <div class="lang-card" data-lang-filter="Hindi">
           <span class="lang-title">Hindi</span><span class="lang-sub">हिन्दी</span>
         </div>
       </div>
@@ -278,10 +278,10 @@
 
     <!-- LATEST SERIES GRID -->
     <div class="section-heading" id="listTitle">Latest Series</div>
-    <div class="poster-grid">
+    <div class="poster-grid" id="posterGrid">
 
       <!-- Card 1: Dragon Booster (Seasons 1, 2, 3) -->
-      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('dragonbooster', 1)">
+      <div class="poster-card" data-cartoon="dragonbooster" data-lang="Telugu">
         <div class="poster-img-wrap">
           <span class="badge-season">Seasons 1–3</span>
           <span class="badge-ep">Telugu Dub</span>
@@ -294,7 +294,7 @@
       </div>
 
       <!-- Card 2: The Smurfs (Telugu) -->
-      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('smurfs', 1)">
+      <div class="poster-card" data-cartoon="smurfs" data-lang="Telugu">
         <div class="poster-img-wrap">
           <span class="badge-season">Kushi TV</span>
           <span class="badge-ep">3 Episodes</span>
@@ -307,7 +307,7 @@
       </div>
 
       <!-- Card 3: Unlimited Book of Spells -->
-      <div class="poster-card" data-lang="English Hindi" onclick="openCartoon('ubos', 1)">
+      <div class="poster-card" data-cartoon="ubos" data-lang="English Hindi">
         <div class="poster-img-wrap">
           <span class="badge-season">Full Series</span>
           <span class="badge-ep">26 Episodes</span>
@@ -320,7 +320,7 @@
       </div>
 
       <!-- Card 4: Creep School -->
-      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('creepschool', 1)">
+      <div class="poster-card" data-cartoon="creepschool" data-lang="Telugu">
         <div class="poster-img-wrap">
           <span class="badge-season">Kushi TV</span>
           <span class="badge-ep">Telugu</span>
@@ -336,50 +336,48 @@
   </div>
 
   <script>
-    const cartoons = {
-      dragonbooster: {
-        title: "Dragon Booster (Telugu)",
-        poster: "https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg",
-        tags: ["Season 1", "Season 2", "Season 3", "Telugu Dub"],
-        desc: "Young Artha Penn is chosen by Beau, the legendary black-and-gold dragon of legend, to become the Dragon Booster and prevent a war between humans and dragons.",
-        type: "seasons",
-        seasons: [
-          {
-            name: "Season 1",
-            episodes: [
-              { name: "EP 1", videoId: "pjq_pYVQCMU" },
-              { name: "EP 3: Into The Fire", videoId: "2ZrK-u0SqIs" }
-            ]
-          },
-          {
-            name: "Season 2",
-            episodes: [
-              { name: "EP 1 to 5 (Full)", videoId: "d-ANeBW5YOE" },
-              { name: "EP 6 to 10 (Full)", videoId: "MN2dH7f8EGs" }
-            ]
-          },
-          {
-            name: "Season 3",
-            episodes: [
-              { name: "EP 1 to 7 (Full)", videoId: "9ez1y3uu3rA" },
-              { name: "EP 4", videoId: "73Qe5UUAv4c" }
-            ]
-          }
-        ],
-        directUrl: "https://youtu.be/pjq_pYVQCMU"
-      },
-      smurfs: {
-        title: "The Smurfs (Telugu)",
-        poster: "https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",
-        tags: ["Telugu Dub", "Kushi TV", "Adventure", "Comedy"],
-        desc: "Tiny blue creatures living in mushroom houses in the forest outsmart the evil wizard Gargamel and his cat Azrael in fun-filled adventures.",
-        type: "videos",
-        episodes: [
-          { name: "EP 1", videoId: "-dEBQM6QvNo" },
-          { name: "EP 2", videoId: "tBm57--ufmc" },
-          { name: "EP 3: AstroSmurf", videoId: "COhZfnMW6iI" }
-        ],
-        directUrl: "https://www.youtube.com/watch?v=-dEBQM6QvNo"
-      },
-      ubos: {
-        title:
+    (function() {
+      const cartoons = {
+        dragonbooster: {
+          title: "Dragon Booster (Telugu)",
+          poster: "https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg",
+          tags: ["Season 1", "Season 2", "Season 3", "Telugu Dub"],
+          desc: "Young Artha Penn is chosen by Beau, the legendary black-and-gold dragon of legend, to become the Dragon Booster and prevent a war between humans and dragons.",
+          type: "seasons",
+          seasons: [
+            {
+              name: "Season 1",
+              episodes: [
+                { name: "EP 1", videoId: "pjq_pYVQCMU" },
+                { name: "EP 3: Into The Fire", videoId: "2ZrK-u0SqIs" }
+              ]
+            },
+            {
+              name: "Season 2",
+              episodes: [
+                { name: "EP 1 to 5 (Full)", videoId: "d-ANeBW5YOE" },
+                { name: "EP 6 to 10 (Full)", videoId: "MN2dH7f8EGs" }
+              ]
+            },
+            {
+              name: "Season 3",
+              episodes: [
+                { name: "EP 1 to 7 (Full)", videoId: "9ez1y3uu3rA" },
+                { name: "EP 4", videoId: "73Qe5UUAv4c" }
+              ]
+            }
+          ],
+          directUrl: "https://youtu.be/pjq_pYVQCMU"
+        },
+        smurfs: {
+          title: "The Smurfs (Telugu)",
+          poster: "https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",
+          tags: ["Telugu Dub", "Kushi TV", "Adventure", "Comedy"],
+          desc: "Tiny blue creatures living in mushroom houses in the forest outsmart the evil wizard Gargamel and his cat Azrael in fun-filled adventures.",
+          type: "videos",
+          episodes: [
+            { name: "EP 1", videoId: "-dEBQM6QvNo" },
+            { name: "EP 2", videoId: "tBm57--ufmc" },
+            { name: "EP 3: AstroSmurf", videoId: "COhZfnMW6iI" }
+          ],
+          directUrl: "
