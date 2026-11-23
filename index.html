@@ -124,9 +124,18 @@
 
   <script>
     var curLang="all";
-    var jcaId="jackie-chan-adventures-1080p-ai-upscale";
     var shows={
-      db_te:{t:"Dragon Booster (Telugu)",p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",tags:["Telugu","39 Episodes","S1-S3"],d:"About: 39 episodes across Season 1 (13), Season 2 (13), and Season 3 (13).",eps:[["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["EP 8","xk5dCK0LUR0"],["EP 9","xa5hXhooInw"],["EP 10","TDckzfd4NxA"],["EP 11","jUdgYE61dc4"],["EP 12","2ZrK-u0SqIs"],["EP 13","NfWjpgv3Euc"],["S2 EP 1","j5Frq2WHMkI"],["S2 EP 2","d-ANeBW5YOE"],["S2 EP 3","MN2dH7f8EGs"],["S2 EP 4","Z80iAtUsRa0"],["S2 EP 5","RwjW7svwcgc"],["S2 EP 6","-Npjs8zbyHQ"],["S2 EP 7","ArbH-6lh1Os"],["S2 EP 8","j5Frq2WHMkI"],["S2 EP 9","Z80iAtUsRa0"],["S2 EP 10","RwjW7svwcgc"],["S2 EP 11","RwjW7svwcgc"],["S2 EP 12","-Npjs8zbyHQ"],["S2 EP 13","ArbH-6lh1Os"],["S3 EP 1","aQ_vVNmmYW0"],["S3 EP 2","Pf1P4ODuikc"],["S3 EP 3","73Qe5UUAv4c"],["S3 EP 4","FFG-Zng6Dbg"],["S3 EP 5","9ez1y3uu3rA"],["S3 EP 6","aQ_vVNmmYW0"],["S3 EP 7","Pf1P4ODuikc"],["S3 EP 8","FFG-Zng6Dbg"],["S3 EP 9","73Qe5UUAv4c"],["S3 EP 10","9ez1y3uu3rA"],["S3 EP 11","aQ_vVNmmYW0"],["S3 EP 12","Pf1P4ODuikc"],["S3 EP 13","FFG-Zng6Dbg"]]},
+      db_te:{
+        t:"Dragon Booster (Telugu)",
+        p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",
+        tags:["Telugu","39 Episodes","S1-S3"],
+        d:"About: 39 episodes across Season 1 (13), Season 2 (13), and Season 3 (13).",
+        eps:[
+          ["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["EP 8","xk5dCK0LUR0"],["EP 9","TDckzfd4NxA"],["EP 10","RwjW7svwcgc"],["EP 11","j5Frq2WHMkI"],["EP 12","d-ANeBW5YOE"],["EP 13","MN2dH7f8EGs"],
+          ["S2 EP 1","Z80iAtUsRa0"],["S2 EP 2","-Npjs8zbyHQ"],["S2 EP 3","ArbH-6lh1Os"],["S2 EP 4","aQ_vVNmmYW0"],["S2 EP 5","Pf1P4ODuikc"],["S2 EP 6","FFG-Zng6Dbg"],["S2 EP 7","9ez1y3uu3rA"],["S2 EP 8","xa5hXhooInw"],["S2 EP 9","jUdgYE61dc4"],["S2 EP 10","2ZrK-u0SqIs"],["S2 EP 11","73Qe5UUAv4c"],["S2 EP 12","W6cyEqR2kns"],["S2 EP 13","NfWjpgv3Euc"],
+          ["S3 EP 1","pjq_pYVQCMU"],["S3 EP 2","xk5dCK0LUR0"],["S3 EP 3","TDckzfd4NxA"],["S3 EP 4","RwjW7svwcgc"],["S3 EP 5","j5Frq2WHMkI"],["S3 EP 6","d-ANeBW5YOE"],["S3 EP 7","MN2dH7f8EGs"],["S3 EP 8","Z80iAtUsRa0"],["S3 EP 9","-Npjs8zbyHQ"],["S3 EP 10","ArbH-6lh1Os"],["S3 EP 11","aQ_vVNmmYW0"],["S3 EP 12","Pf1P4ODuikc"],["S3 EP 13","FFG-Zng6Dbg"]
+        ]
+      },
       sm_te:{t:"The Smurfs (Telugu)",p:"https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Smurfs outsmart Gargamel and Azrael in fun adventures.",eps:[["EP 1","-dEBQM6QvNo"],["EP 2","tBm57--ufmc"],["EP 3","COhZfnMW6iI"]]},
       cs_te:{t:"Creep School (Telugu)",p:"https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Kids end up at Creep School full of friendly monsters.",eps:[["EP 1","Qs4Si3yXEwI"]]},
       ubos:{t:"Unlimited Book of Spells",p:"https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg",tags:["26 Eps","Magic"],d:"About: Cassy, Verne, and Gus stop Zarlak using magic.",plist:"PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",count:26},
@@ -134,18 +143,12 @@
         t:"Jackie Chan Adventures (Internet Archive)",
         p:"https://archive.org/services/img/jackie-chan-adventures-1080p-ai-upscale",
         tags:["Internet Archive","English"],
-        d:"About: Jackie Chan Adventures episodes from Internet Archive.",
+        d:"About: Jackie Chan Adventures videos from Internet Archive.",
         mode:"archive",
         eps:[
-          ["S1 EP 1",jcaId],["S1 EP 2",jcaId],["S1 EP 3",jcaId],["S1 EP 4",jcaId],["S1 EP 5",jcaId],["S1 EP 6",jcaId],
-          ["S1 EP 10",jcaId],["S1 EP 11",jcaId],["S1 EP 12",jcaId],["S1 EP 13",jcaId],
-          ["S2 EP 4",jcaId],["S2 EP 5",jcaId],["S2 EP 6",jcaId],["S2 EP 8",jcaId],["S2 EP 9",jcaId],["S2 EP 10",jcaId],
-          ["S2 EP 12",jcaId],["S2 EP 13",jcaId],["S2 EP 14",jcaId],["S2 EP 15",jcaId],["S2 EP 16",jcaId],["S2 EP 17",jcaId],
-          ["S2 EP 18",jcaId],["S2 EP 19",jcaId],["S2 EP 23",jcaId],["S2 EP 24",jcaId],["S2 EP 27",jcaId],
-          ["S2 EP 31",jcaId],["S2 EP 32",jcaId],["S2 EP 33",jcaId],["S2 EP 34",jcaId],["S2 EP 35",jcaId],["S2 EP 36",jcaId],["S2 EP 37",jcaId],
-          ["S3 EP 8",jcaId],["S3 EP 9",jcaId],["S3 EP 10",jcaId],["S3 EP 11",jcaId],["S3 EP 12",jcaId],["S3 EP 16",jcaId],["S3 EP 17",jcaId],
-          ["S4 EP 1",jcaId],["S4 EP 2",jcaId],["S4 EP 4",jcaId],["S4 EP 5",jcaId],["S4 EP 6",jcaId],["S4 EP 7",jcaId],["S4 EP 8",jcaId],["S4 EP 9",jcaId],
-          ["S5 EP 1",jcaId],["S5 EP 2",jcaId],["S5 EP 3",jcaId],["S5 EP 5",jcaId],["S5 EP 6",jcaId]
+          ["1080p AI Upscale","jackie-chan-adventures-1080p-ai-upscale"],
+          ["The Power Within VHS","Jackie_Chan_Adventures_The_Power_Within_2001_Columbia_Tristar_Tape"],
+          ["CN 2003 Tape","totallyspies-jackie-chan-adventures-young-hercules-x-men-ev"]
         ]
       },
       db_en:{t:"Dragon Booster (English)",p:"https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg",tags:["English","Action"],d:"About: English episode of Dragon Booster.",eps:[["EP 10","s1KFrb7DpnI"]]},
@@ -154,14 +157,20 @@
       mr_en:{t:"Master Raindrop (English)",p:"https://i.ytimg.com/vi/uP7xfgTi6Dg/hqdefault.jpg",tags:["English","Fantasy"],d:"About: Master Raindrop English episodes.",eps:[["EP 1","uP7xfgTi6Dg"],["EP 3","lHNKHsFhzBM"],["EP 11","NwApLTjXBPI"],["EP 22","y4tjxXBq29I"],["EP 25","vSz4-6Z4ORg"],["EP 26","6FKTTueY_mg"]]}
     };
 
+    function setPlayerUrl(url){
+      var f=document.getElementById("ytFrame");
+      f.src="";
+      setTimeout(function(){f.src=url;},20);
+    }
+
     function playEp(vid,label,auto,isArchive){
       document.getElementById("wTitle").innerText=label;
       if(isArchive){
-        document.getElementById("ytFrame").src="https://archive.org/embed/"+vid;
         document.getElementById("ytLink").href="https://archive.org/details/"+vid;
+        setPlayerUrl("https://archive.org/embed/"+vid);
       }else{
-        document.getElementById("ytFrame").src="https://www.youtube.com/embed/"+vid+"?"+(auto?"autoplay=1&":"")+"rel=0";
         document.getElementById("ytLink").href="https://www.youtube.com/watch?v="+vid;
+        setPlayerUrl("https://www.youtube.com/embed/"+vid+"?rel=0"+(auto?"&autoplay=1":""));
       }
     }
 
@@ -180,13 +189,14 @@
             var all=g.getElementsByTagName("button");for(var n=0;n<all.length;n++)all[n].className="btn";
             this.className="btn active";
             document.getElementById("wTitle").innerText=s.t+" - EP "+idx;
-            document.getElementById("ytFrame").src="https://www.youtube.com/embed?listType=playlist&list="+s.plist+"&index="+(idx-1)+"&rel=0";
+            document.getElementById("ytLink").href="https://www.youtube.com/playlist?list="+s.plist;
+            setPlayerUrl("https://www.youtube.com/embed?listType=playlist&list="+s.plist+"&index="+(idx-1)+"&rel=0");
           };
           g.appendChild(b);
         }
         document.getElementById("wTitle").innerText=s.t+" - EP 1";
-        document.getElementById("ytFrame").src="https://www.youtube.com/embed?listType=playlist&list="+s.plist+"&index=0&rel=0";
         document.getElementById("ytLink").href="https://www.youtube.com/playlist?list="+s.plist;
+        setPlayerUrl("https://www.youtube.com/embed?listType=playlist&list="+s.plist+"&index=0&rel=0");
       }else{
         var isArch=(s.mode==="archive");
         for(var e=0;e<s.eps.length;e++){
