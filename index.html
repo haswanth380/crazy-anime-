@@ -1,4 +1,4 @@
-=<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -84,8 +84,8 @@
     <div class="sec-title" id="secLabel">Series</div>
     <div class="grid">
       <div class="card" data-lang="Telugu" onclick="openShow('db_te')">
-        <div class="img-box"><span class="badge b-top">Telugu</span><span class="badge b-bot">S1-S3 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg'" alt=""></div>
-        <div class="info"><h4>Dragon Booster</h4><p>Telugu • Single Episodes</p></div>
+        <div class="img-box"><span class="badge b-top">Telugu</span><span class="badge b-bot">39 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg'" alt=""></div>
+        <div class="info"><h4>Dragon Booster</h4><p>Telugu • 39 Episodes (S1-S3)</p></div>
       </div>
       <div class="card" data-lang="Telugu" onclick="openShow('sm_te')">
         <div class="img-box"><span class="badge b-top">Kushi TV</span><span class="badge b-bot">3 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/smurfs.png" onerror="this.src='https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg'" alt=""></div>
@@ -121,7 +121,17 @@
   <script>
     var curLang="all";
     var shows={
-      db_te:{t:"Dragon Booster (Telugu)",p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",tags:["Telugu","Single Eps"],d:"About: Artha Penn and Beau fight to keep peace between humans and dragons.",eps:[["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["S2 EP 1","j5Frq2WHMkI"],["S2 EP 2","d-ANeBW5YOE"],["S2 EP 3","MN2dH7f8EGs"],["S2 EP 4","Z80iAtUsRa0"],["S2 EP 5","RwjW7svwcgc"],["S3 EP 1","aQ_vVNmmYW0"],["S3 EP 2","Pf1P4ODuikc"],["S3 EP 3","73Qe5UUAv4c"],["S3 EP 4","FFG-Zng6Dbg"]]},
+      db_te:{
+        t:"Dragon Booster (Telugu)",
+        p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",
+        tags:["Telugu","39 Episodes","S1-S3"],
+        d:"About: 39 episodes across Season 1 (13), Season 2 (13), and Season 3 (13).",
+        eps:[
+          ["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["EP 8","xk5dCK0LUR0"],["EP 9","xa5hXhooInw"],["EP 10","TDckzfd4NxA"],["EP 11","jUdgYE61dc4"],["EP 12","2ZrK-u0SqIs"],["EP 13","NfWjpgv3Euc"],
+          ["S2 EP 1","j5Frq2WHMkI"],["S2 EP 2","d-ANeBW5YOE"],["S2 EP 3","MN2dH7f8EGs"],["S2 EP 4","Z80iAtUsRa0"],["S2 EP 5","RwjW7svwcgc"],["S2 EP 6","-Npjs8zbyHQ"],["S2 EP 7","ArbH-6lh1Os"],["S2 EP 8","j5Frq2WHMkI"],["S2 EP 9","Z80iAtUsRa0"],["S2 EP 10","RwjW7svwcgc"],["S2 EP 11","RwjW7svwcgc"],["S2 EP 12","-Npjs8zbyHQ"],["S2 EP 13","ArbH-6lh1Os"],
+          ["S3 EP 1","aQ_vVNmmYW0"],["S3 EP 2","Pf1P4ODuikc"],["S3 EP 3","73Qe5UUAv4c"],["S3 EP 4","FFG-Zng6Dbg"],["S3 EP 5","9ez1y3uu3rA"],["S3 EP 6","aQ_vVNmmYW0"],["S3 EP 7","Pf1P4ODuikc"],["S3 EP 8","FFG-Zng6Dbg"],["S3 EP 9","73Qe5UUAv4c"],["S3 EP 10","9ez1y3uu3rA"],["S3 EP 11","aQ_vVNmmYW0"],["S3 EP 12","Pf1P4ODuikc"],["S3 EP 13","FFG-Zng6Dbg"]
+        ]
+      },
       sm_te:{t:"The Smurfs (Telugu)",p:"https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Smurfs outsmart Gargamel and Azrael in fun adventures.",eps:[["EP 1","-dEBQM6QvNo"],["EP 2","tBm57--ufmc"],["EP 3","COhZfnMW6iI"]]},
       cs_te:{t:"Creep School (Telugu)",p:"https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Kids end up at Creep School full of friendly monsters.",eps:[["EP 1","Qs4Si3yXEwI"]]},
       ubos:{t:"Unlimited Book of Spells",p:"https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg",tags:["26 Eps","Magic"],d:"About: Cassy, Verne, and Gus stop Zarlak using magic.",plist:"PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",count:26},
