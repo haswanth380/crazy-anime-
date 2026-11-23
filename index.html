@@ -99,6 +99,10 @@
         <div class="img-box"><span class="badge b-top">Full</span><span class="badge b-bot">26 Eps</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" onerror="this.src='https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg'" alt=""></div>
         <div class="info"><h4>Unlimited Book of Spells</h4><p>English / Hindi</p></div>
       </div>
+      <div class="card" data-lang="English Hindi" onclick="openShow('jca_en')">
+        <div class="img-box"><span class="badge b-top">Intro + Eps</span><span class="badge b-bot">Jackie Chan</span><img src="https://i.ytimg.com/vi/p3RMOO1lP-I/hqdefault.jpg" alt=""></div>
+        <div class="info"><h4>Jackie Chan Adventures</h4><p>Intro + Episodes</p></div>
+      </div>
       <div class="card" data-lang="English" onclick="openShow('db_en')">
         <div class="img-box"><span class="badge b-top">English</span><span class="badge b-bot">1 Ep</span><img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg'" alt=""></div>
         <div class="info"><h4>Dragon Booster (EN)</h4><p>English • 1 Episode</p></div>
@@ -121,20 +125,11 @@
   <script>
     var curLang="all";
     var shows={
-      db_te:{
-        t:"Dragon Booster (Telugu)",
-        p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",
-        tags:["Telugu","39 Episodes","S1-S3"],
-        d:"About: 39 episodes across Season 1 (13), Season 2 (13), and Season 3 (13).",
-        eps:[
-          ["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["EP 8","xk5dCK0LUR0"],["EP 9","xa5hXhooInw"],["EP 10","TDckzfd4NxA"],["EP 11","jUdgYE61dc4"],["EP 12","2ZrK-u0SqIs"],["EP 13","NfWjpgv3Euc"],
-          ["S2 EP 1","j5Frq2WHMkI"],["S2 EP 2","d-ANeBW5YOE"],["S2 EP 3","MN2dH7f8EGs"],["S2 EP 4","Z80iAtUsRa0"],["S2 EP 5","RwjW7svwcgc"],["S2 EP 6","-Npjs8zbyHQ"],["S2 EP 7","ArbH-6lh1Os"],["S2 EP 8","j5Frq2WHMkI"],["S2 EP 9","Z80iAtUsRa0"],["S2 EP 10","RwjW7svwcgc"],["S2 EP 11","RwjW7svwcgc"],["S2 EP 12","-Npjs8zbyHQ"],["S2 EP 13","ArbH-6lh1Os"],
-          ["S3 EP 1","aQ_vVNmmYW0"],["S3 EP 2","Pf1P4ODuikc"],["S3 EP 3","73Qe5UUAv4c"],["S3 EP 4","FFG-Zng6Dbg"],["S3 EP 5","9ez1y3uu3rA"],["S3 EP 6","aQ_vVNmmYW0"],["S3 EP 7","Pf1P4ODuikc"],["S3 EP 8","FFG-Zng6Dbg"],["S3 EP 9","73Qe5UUAv4c"],["S3 EP 10","9ez1y3uu3rA"],["S3 EP 11","aQ_vVNmmYW0"],["S3 EP 12","Pf1P4ODuikc"],["S3 EP 13","FFG-Zng6Dbg"]
-        ]
-      },
+      db_te:{t:"Dragon Booster (Telugu)",p:"https://i.ytimg.com/vi/xa5hXhooInw/hqdefault.jpg",tags:["Telugu","39 Episodes","S1-S3"],d:"About: 39 episodes across Season 1 (13), Season 2 (13), and Season 3 (13).",eps:[["EP 1","xa5hXhooInw"],["EP 2","jUdgYE61dc4"],["EP 3","2ZrK-u0SqIs"],["EP 4","73Qe5UUAv4c"],["EP 5","W6cyEqR2kns"],["EP 6","NfWjpgv3Euc"],["EP 7","pjq_pYVQCMU"],["EP 8","xk5dCK0LUR0"],["EP 9","xa5hXhooInw"],["EP 10","TDckzfd4NxA"],["EP 11","jUdgYE61dc4"],["EP 12","2ZrK-u0SqIs"],["EP 13","NfWjpgv3Euc"],["S2 EP 1","j5Frq2WHMkI"],["S2 EP 2","d-ANeBW5YOE"],["S2 EP 3","MN2dH7f8EGs"],["S2 EP 4","Z80iAtUsRa0"],["S2 EP 5","RwjW7svwcgc"],["S2 EP 6","-Npjs8zbyHQ"],["S2 EP 7","ArbH-6lh1Os"],["S2 EP 8","j5Frq2WHMkI"],["S2 EP 9","Z80iAtUsRa0"],["S2 EP 10","RwjW7svwcgc"],["S2 EP 11","RwjW7svwcgc"],["S2 EP 12","-Npjs8zbyHQ"],["S2 EP 13","ArbH-6lh1Os"],["S3 EP 1","aQ_vVNmmYW0"],["S3 EP 2","Pf1P4ODuikc"],["S3 EP 3","73Qe5UUAv4c"],["S3 EP 4","FFG-Zng6Dbg"],["S3 EP 5","9ez1y3uu3rA"],["S3 EP 6","aQ_vVNmmYW0"],["S3 EP 7","Pf1P4ODuikc"],["S3 EP 8","FFG-Zng6Dbg"],["S3 EP 9","73Qe5UUAv4c"],["S3 EP 10","9ez1y3uu3rA"],["S3 EP 11","aQ_vVNmmYW0"],["S3 EP 12","Pf1P4ODuikc"],["S3 EP 13","FFG-Zng6Dbg"]]},
       sm_te:{t:"The Smurfs (Telugu)",p:"https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Smurfs outsmart Gargamel and Azrael in fun adventures.",eps:[["EP 1","-dEBQM6QvNo"],["EP 2","tBm57--ufmc"],["EP 3","COhZfnMW6iI"]]},
       cs_te:{t:"Creep School (Telugu)",p:"https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg",tags:["Telugu","Kushi TV"],d:"About: Kids end up at Creep School full of friendly monsters.",eps:[["EP 1","Qs4Si3yXEwI"]]},
       ubos:{t:"Unlimited Book of Spells",p:"https://i.ytimg.com/vi/5VMJY095Bdw/hqdefault.jpg",tags:["26 Eps","Magic"],d:"About: Cassy, Verne, and Gus stop Zarlak using magic.",plist:"PLLhOnau-tupQ7VsRsmtqBxrfk7zQCBiDP",count:26},
+      jca_en:{t:"Jackie Chan Adventures",p:"https://i.ytimg.com/vi/p3RMOO1lP-I/hqdefault.jpg",tags:["Intro","Episodes"],d:"About: Jackie Chan Adventures intro and episodes. Use Direct Link for Internet Archive.",directUrl:"https://archive.org/details/jackie-chan-adventures-1080p-ai-upscale",eps:[["Intro","p3RMOO1lP-I"],["S1 EP 1","nW0U_SeUbBQ"],["Hindi S1 EP 1","fUClKKPEq8c"],["Tamil S1 EP 1","ieIfdTlY07w"],["Story"," -ena0cUZb5Y".trim()]]},
       db_en:{t:"Dragon Booster (English)",p:"https://i.ytimg.com/vi/s1KFrb7DpnI/hqdefault.jpg",tags:["English","Action"],d:"About: English episode of Dragon Booster.",eps:[["EP 10","s1KFrb7DpnI"]]},
       sm_en:{t:"The Smurfs (English)",p:"https://i.ytimg.com/vi/EgdZQe_4sbc/hqdefault.jpg",tags:["English","Comedy"],d:"About: English episodes of The Smurfs.",eps:[["EP 1","EgdZQe_4sbc"],["EP 2","7zQoiPhHiag"]]},
       cs_en:{t:"Creep School (English)",p:"https://i.ytimg.com/vi/qsfUFDG6Coc/hqdefault.jpg",tags:["English","Mystery"],d:"About: English episode of Creep School.",eps:[["EP 1","qsfUFDG6Coc"]]},
@@ -181,6 +176,9 @@
           g.appendChild(btn);
         }
         playEp(s.eps[0][1],s.t+" - "+s.eps[0][0],false);
+      }
+      if(s.directUrl){
+        document.getElementById("ytLink").href=s.directUrl;
       }
       document.getElementById("watchView").style.display="block";
       document.getElementById("filters").style.display="none";
