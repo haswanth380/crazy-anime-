@@ -97,6 +97,27 @@
     .quality-tip {
       font-size: 12px; color: #b8aedc; margin-bottom: 12px; display: block;
     }
+    .season-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .season-btn {
+      background: #1c1538;
+      color: #d8b4fe;
+      border: 1px solid #7b2cbf;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .season-btn.active, .season-btn:hover {
+      background: #7b2cbf;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
     .ep-grid {
       display: flex;
       flex-wrap: wrap;
@@ -190,23 +211,23 @@
 
   <!-- Top Navbar with Search Bar -->
   <nav>
-    <div class="logo" id="logoBtn">CRAZY <span>ANDY</span></div>
+    <div class="logo" onclick="closeWatch()">CRAZY <span>ANDY</span></div>
     <div class="nav-right">
-      <button class="home-btn" id="homeBtn">Home</button>
-      <input type="text" id="searchInput" class="search-box" placeholder="Search anime...">
+      <button class="home-btn" onclick="closeWatch()">🏠 Home</button>
+      <input type="text" id="searchInput" class="search-box" onkeyup="filterCards()" placeholder="Search anime...">
     </div>
   </nav>
 
   <div class="container">
 
-    <!-- WATCH PLAYER & ABOUT SECTION -->
+    <!-- WATCH PLAYER SECTION -->
     <div id="watchView">
       <div class="anime-banner">
         <img id="watchPoster" class="banner-poster" src="" alt="Poster">
         <div class="banner-details">
           <h1 id="watchHeading">Title</h1>
           <div class="banner-tags" id="watchTags"></div>
-          <div class="overview-label">About / Overview</div>
+          <div class="overview-label">Overview</div>
           <p class="overview-text" id="watchDesc"></p>
         </div>
       </div>
@@ -216,14 +237,19 @@
       </div>
 
       <div class="controls-panel">
-        <span class="quality-tip">HD Quality Tip: వీడియో ప్లే అవుతున్నప్పుడు కింద ఉన్న Settings లో హై క్వాలిటీ సెలెక్ట్ చేసుకోండి.</span>
+        <span class="quality-tip">💡 <b>HD Quality Tip:</b> వీడియో ప్లే అవుతున్నప్పుడు కింద ఉన్న <b>Settings (⚙️) → Quality</b> లో హై క్వాలిటీ సెలెక్ట్ చేసుకోండి.</span>
+
+        <div id="seasonSelectorBox" style="display:none;">
+          <span class="panel-title">Select Season:</span>
+          <div class="season-row" id="seasonButtons"></div>
+        </div>
 
         <span class="panel-title">All Episodes:</span>
         <div class="ep-grid" id="allEpisodesGrid"></div>
 
         <div class="btn-row">
-          <button class="action-btn" id="closePlayerBtn" style="background:#ff4757; border:none;">Close Player</button>
-          <a id="directYtLink" href="#" target="_blank" class="action-btn">Open Direct Link</a>
+          <button class="action-btn" onclick="closeWatch()" style="background:#ff4757; border:none;">✕ Close Player</button>
+          <a id="directYtLink" href="#" target="_blank" class="action-btn">▶ Open Direct Link</a>
         </div>
       </div>
     </div>
@@ -231,20 +257,20 @@
     <!-- LANGUAGE CHANGER -->
     <div id="homeFilters">
       <div class="section-heading">Watch in Your Own Language</div>
-      <div class="lang-row" id="langRow">
-        <div class="lang-card active" data-lang-filter="all">
+      <div class="lang-row">
+        <div class="lang-card active" onclick="selectLang('all', this)">
           <span class="lang-title">All</span><span class="lang-sub">అన్నీ</span>
         </div>
-        <div class="lang-card" data-lang-filter="Telugu">
+        <div class="lang-card" onclick="selectLang('Telugu', this)">
           <span class="lang-title">Telugu</span><span class="lang-sub">తెలుగు</span>
         </div>
-        <div class="lang-card" data-lang-filter="Japanese">
+        <div class="lang-card" onclick="selectLang('Japanese', this)">
           <span class="lang-title">Japanese</span><span class="lang-sub">日本語</span>
         </div>
-        <div class="lang-card" data-lang-filter="English">
+        <div class="lang-card" onclick="selectLang('English', this)">
           <span class="lang-title">English</span><span class="lang-sub">Sub / Dub</span>
         </div>
-        <div class="lang-card" data-lang-filter="Hindi">
+        <div class="lang-card" onclick="selectLang('Hindi', this)">
           <span class="lang-title">Hindi</span><span class="lang-sub">हिन्दी</span>
         </div>
       </div>
@@ -252,37 +278,108 @@
 
     <!-- LATEST SERIES GRID -->
     <div class="section-heading" id="listTitle">Latest Series</div>
-    <div class="poster-grid" id="posterGrid">
+    <div class="poster-grid">
 
-      <!-- Card 1: Dragon Booster -->
-      <div class="poster-card" data-cartoon="dragonbooster" data-lang="Telugu">
+      <!-- Card 1: Dragon Booster (Seasons 1, 2, 3) -->
+      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('dragonbooster', 1)">
         <div class="poster-img-wrap">
-          <span class="badge-season">Telugu Dub</span>
-          <span class="badge-ep">17 Episodes</span>
-          <img class="card-poster-img" data-fallback="https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" alt="Dragon Booster">
+          <span class="badge-season">Seasons 1–3</span>
+          <span class="badge-ep">Telugu Dub</span>
+          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/dragonbooster.png" onerror="this.src='https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg'" alt="Dragon Booster">
         </div>
         <div class="poster-info">
           <h4 class="poster-title">Dragon Booster</h4>
-          <div class="poster-meta">Telugu - EP 1 to 17</div>
+          <div class="poster-meta">Telugu • Season 1, 2 & 3</div>
         </div>
       </div>
 
       <!-- Card 2: The Smurfs (Telugu) -->
-      <div class="poster-card" data-cartoon="smurfs" data-lang="Telugu">
+      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('smurfs', 1)">
         <div class="poster-img-wrap">
           <span class="badge-season">Kushi TV</span>
           <span class="badge-ep">3 Episodes</span>
-          <img class="card-poster-img" data-fallback="https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg" src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/smurfs.png" alt="The Smurfs">
+          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/smurfs.png" onerror="this.src='https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg'" alt="The Smurfs">
         </div>
         <div class="poster-info">
           <h4 class="poster-title">The Smurfs</h4>
-          <div class="poster-meta">Telugu - 3 Episodes</div>
+          <div class="poster-meta">Telugu • 3 Episodes</div>
         </div>
       </div>
 
       <!-- Card 3: Unlimited Book of Spells -->
-      <div class="poster-card" data-cartoon="ubos" data-lang="English Hindi">
+      <div class="poster-card" data-lang="English Hindi" onclick="openCartoon('ubos', 1)">
         <div class="poster-img-wrap">
           <span class="badge-season">Full Series</span>
           <span class="badge-ep">26 Episodes</span>
-          <img class="card-poster-img" data-fallback="
+          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/Ultimate%20Book%20of%20Spells%20Adventure.png" alt="Unlimited Book of Spells">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Unlimited Book of Spells</h4>
+          <div class="poster-meta">English • Hindi • Playlist</div>
+        </div>
+      </div>
+
+      <!-- Card 4: Creep School -->
+      <div class="poster-card" data-lang="Telugu" onclick="openCartoon('creepschool', 1)">
+        <div class="poster-img-wrap">
+          <span class="badge-season">Kushi TV</span>
+          <span class="badge-ep">Telugu</span>
+          <img src="https://raw.githubusercontent.com/haswanth380/crazy-anime-/main/creepschool.png" onerror="this.src='https://i.ytimg.com/vi/Qs4Si3yXEwI/hqdefault.jpg'" alt="Creep School">
+        </div>
+        <div class="poster-info">
+          <h4 class="poster-title">Creep School</h4>
+          <div class="poster-meta">Telugu • Kushi TV Classic</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const cartoons = {
+      dragonbooster: {
+        title: "Dragon Booster (Telugu)",
+        poster: "https://i.ytimg.com/vi/pjq_pYVQCMU/hqdefault.jpg",
+        tags: ["Season 1", "Season 2", "Season 3", "Telugu Dub"],
+        desc: "Young Artha Penn is chosen by Beau, the legendary black-and-gold dragon of legend, to become the Dragon Booster and prevent a war between humans and dragons.",
+        type: "seasons",
+        seasons: [
+          {
+            name: "Season 1",
+            episodes: [
+              { name: "EP 1", videoId: "pjq_pYVQCMU" },
+              { name: "EP 3: Into The Fire", videoId: "2ZrK-u0SqIs" }
+            ]
+          },
+          {
+            name: "Season 2",
+            episodes: [
+              { name: "EP 1 to 5 (Full)", videoId: "d-ANeBW5YOE" },
+              { name: "EP 6 to 10 (Full)", videoId: "MN2dH7f8EGs" }
+            ]
+          },
+          {
+            name: "Season 3",
+            episodes: [
+              { name: "EP 1 to 7 (Full)", videoId: "9ez1y3uu3rA" },
+              { name: "EP 4", videoId: "73Qe5UUAv4c" }
+            ]
+          }
+        ],
+        directUrl: "https://youtu.be/pjq_pYVQCMU"
+      },
+      smurfs: {
+        title: "The Smurfs (Telugu)",
+        poster: "https://i.ytimg.com/vi/COhZfnMW6iI/hqdefault.jpg",
+        tags: ["Telugu Dub", "Kushi TV", "Adventure", "Comedy"],
+        desc: "Tiny blue creatures living in mushroom houses in the forest outsmart the evil wizard Gargamel and his cat Azrael in fun-filled adventures.",
+        type: "videos",
+        episodes: [
+          { name: "EP 1", videoId: "-dEBQM6QvNo" },
+          { name: "EP 2", videoId: "tBm57--ufmc" },
+          { name: "EP 3: AstroSmurf", videoId: "COhZfnMW6iI" }
+        ],
+        directUrl: "https://www.youtube.com/watch?v=-dEBQM6QvNo"
+      },
+      ubos: {
+        title:
